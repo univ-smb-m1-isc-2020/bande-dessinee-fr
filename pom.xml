@@ -11,17 +11,20 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>me.guillaume</groupId>
+    <groupId>fr.univ-smb.isc.m1</groupId>
     <artifactId>chuck-facts</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <name>dummy</name>
+    <name>chuck-facts</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>11</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
+        <sonar.projectKey>univ-smb-m1-isc-2020_chuck-facts</sonar.projectKey>
+        <sonar.organization>univ-smb-m1-isc-2020</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
 
     <dependencies>
@@ -31,13 +34,12 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
@@ -73,6 +75,7 @@
             <version>3.19.0</version>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 
     <build>
@@ -119,6 +122,11 @@
                         <SPRING_JPA_DATABASE>POSTGRESQL</SPRING_JPA_DATABASE>
                     </environmentVariables>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>pl.project13.maven</groupId>
+                <artifactId>git-commit-id-plugin</artifactId>
+                <version>4.0.3</version>
             </plugin>
         </plugins>
     </build>

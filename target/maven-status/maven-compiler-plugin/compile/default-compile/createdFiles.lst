@@ -1,0 +1,5 @@
+fr\univ_smb\isc\m1\chuck_facts\adapters\api\ChuckFactsController.class
+fr\univ_smb\isc\m1\chuck_facts\application\ChuckFactsService.class
+fr\univ_smb\isc\m1\chuck_facts\infrastructure\persistence\ChuckFact.class
+fr\univ_smb\isc\m1\chuck_facts\Application.class
+fr\univ_smb\isc\m1\chuck_facts\infrastructure\persistence\ChuckFactsRepository.class
