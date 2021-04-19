@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "FetchDataAndPostToPostgres": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}

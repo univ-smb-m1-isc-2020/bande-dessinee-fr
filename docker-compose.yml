@@ -1,0 +1,21 @@
+version: '3.4'
+
+services:
+  bande-dessinee-fr:
+    image: ${DOCKER_REGISTRY-}bandedessineefr
+    build:
+      context: .
+      dockerfile: bande-dessinee-fr/Dockerfile
+
+  db:
+    image: ${DOCKER_REGISTRY-}postgres
+    restart: always
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: toor
+
+  adminer:
+    image: ${DOCKER_REGISTRY-}adminer
+    restart: always
+    ports:
+      - 8080:8080

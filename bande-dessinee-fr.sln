@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31105.61
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "bande-dessinee-fr", "bande-dessinee-fr\bande-dessinee-fr.csproj", "{F3AAB85A-061A-44E5-B173-4673264FC6DE}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{AC916B5D-B460-4A2B-88B7-6B03873753BB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F3AAB85A-061A-44E5-B173-4673264FC6DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3AAB85A-061A-44E5-B173-4673264FC6DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3AAB85A-061A-44E5-B173-4673264FC6DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3AAB85A-061A-44E5-B173-4673264FC6DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC916B5D-B460-4A2B-88B7-6B03873753BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC916B5D-B460-4A2B-88B7-6B03873753BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC916B5D-B460-4A2B-88B7-6B03873753BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC916B5D-B460-4A2B-88B7-6B03873753BB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FDE3A297-C2B6-427A-BD91-485099C88095}
+	EndGlobalSection
+EndGlobal
