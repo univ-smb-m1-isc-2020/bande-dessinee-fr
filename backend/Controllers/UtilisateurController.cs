@@ -25,33 +25,32 @@ namespace backend.Controllers
         }
         // GET: api/<UtilisateurController>
         [HttpGet]
-        public Task<IEnumerable<Utilisateur>> Get()
+        public IEnumerable<Utilisateur> Get()
         {
             return utilisateurRepository.GetAll();
         }
 
         // GET api/<UtilisateurController>/5
         [HttpGet("{id}")]
-        public Task<Utilisateur> Get(int id)
+        public Utilisateur Get(int id)
         {
             return utilisateurRepository.GetById(id);
         }
 
         // POST api/<UtilisateurController>
         [HttpPost]
-        public async Task<ActionResult<Utilisateur>> Post([FromBody] CreateUtilisateur user)
+        public ActionResult<Utilisateur> Post([FromBody] CreateUtilisateur user)
         {
+            ActionResult res = BadRequest();
+            var itexists = utilisateurRepository.GetByEmail(user.Email);
 
-            var itexists = await utilisateurRepository.GetByEmail(user.Email);
             if (itexists == null)
             {
-                var t = await utilisateurRepository.Add(user);
-                var userfrombdd = utilisateurRepository.GetById(t);
-                return CreatedAtAction(nameof(Utilisateur), new { id = itexists.User_id }, userfrombdd);
+                utilisateurRepository.Add(user);
+                res = Ok(user);
             }
-            return CreatedAtAction(nameof(Utilisateur), new { id = itexists.User_id }, null);
+            return res;
         }
-
 
         // PUT api/<UtilisateurController>/5
         [HttpPut("{id}")]
