@@ -1,3 +1,9 @@
+CREATE DATABASE bande_dessinee_fr;
+
+USE bande_dessinee_fr;
+
+DROP TABLE utilisateur;
+
 CREATE TABLE utilisateur (
 	user_id serial PRIMARY KEY,
 	nom VARCHAR ( 50 ) NOT NULL,
@@ -5,5 +11,3 @@ CREATE TABLE utilisateur (
 	email VARCHAR ( 255 ) UNIQUE NOT NULL,
 	motdepasse VARCHAR ( 255 ) NOT NULL
 );
-
-DROP TABLE utilisateur;
