@@ -17,7 +17,7 @@ namespace backend.Controllers
         };
 
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController()
         {
         }
 
