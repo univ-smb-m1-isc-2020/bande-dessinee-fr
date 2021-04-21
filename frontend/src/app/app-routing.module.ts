@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomepageComponent },
   { path: 'admin', component: AdminpageComponent },
-  { path: 'admin/dashboard', component: DashboardpageComponent },
+  { path: 'admin/dashboard ', component: DashboardpageComponent },
 ];
 
 @NgModule({
