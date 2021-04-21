@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - master
-defaults:
-  run:
-    working-directory: backend
 
 jobs:
   build:
@@ -20,7 +17,7 @@ jobs:
     - name: Push to GitHub Packages
       uses: docker/build-push-action@v1
       with:
-        context: ./backend
+        context: ./backend/
         dockerfile: ./backend/Dockerfile
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
