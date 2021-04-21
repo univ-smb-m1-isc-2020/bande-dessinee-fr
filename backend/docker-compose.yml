@@ -3,11 +3,18 @@ version: '3.4'
 services:
   backend:
     image: ${DOCKER_REGISTRY-}backend
+    restart: always
     build:
       context: .
       dockerfile: Dockerfile
     ports:
       - 6568:80
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.2
+    depends_on:
+    - db
+
 
   db:
     image: postgres
@@ -16,12 +23,28 @@ services:
       - db-data:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: example
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.3
 
   adminer:
     image: adminer
     restart: always
     ports:
       - 7000:8080
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.4
+    depends_on:
+      - db
 volumes:
   db-data:
+
+networks:
+  vpcbr:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.5.0.0/16
+          gateway: 10.5.0.1
     
