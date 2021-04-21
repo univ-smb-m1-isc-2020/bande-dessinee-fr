@@ -2,7 +2,7 @@ CREATE DATABASE bande_dessinee_fr;
 
 USE bande_dessinee_fr;
 
-DROP TABLE utilisateur;
+DROP TABLE IF EXISTS utilisateur;
 
 CREATE TABLE utilisateur (
 	user_id serial PRIMARY KEY,
