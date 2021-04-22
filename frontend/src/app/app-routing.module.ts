@@ -6,9 +6,12 @@ import { DashboardpageComponent } from './components/dashboardpage/dashboardpage
 
 //Home Components
 import { HomepageComponent } from './components/homepage/homepage.component'
+import { SignuppageComponent } from './components/signuppage/signuppage.component'
+
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomepageComponent },
+  { path: 'inscription', component: SignuppageComponent },
   { path: 'admin', component: AdminpageComponent },
   { path: 'admin/dashboard ', component: DashboardpageComponent },
 ];

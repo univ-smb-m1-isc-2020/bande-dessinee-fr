@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-adminpage',
-  templateUrl: './adminpage.component.html',
+  selector: 'app-signuppage',
+  templateUrl: './signuppage.component.html',
   styles: [
     `
     div#droit-col{
@@ -14,7 +14,7 @@ import { Component, OnInit } from '@angular/core';
     `
   ]
 })
-export class AdminpageComponent implements OnInit {
+export class SignuppageComponent implements OnInit {
 
   constructor() { }
 
