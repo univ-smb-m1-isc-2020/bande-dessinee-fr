@@ -21,6 +21,6 @@ Adminer est un outil de visualisation de [bdd](https://info806.visarsylejmani.co
 
 - ~~Integrer swagger~~
 - ~~Integrer migrations posgres avec dbup~~
-- **Enable Cors Policy**
-- Remplire la bdd
+- ~~Enable Cors Policy~~
+- ~~Remplire la bdd~~
 - Client pour angular

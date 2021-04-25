@@ -1,5 +1,6 @@
 ﻿using backend.Models;
 using backend.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ namespace backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class UtilisateurController : ControllerBase
     {
         private readonly UtilisateurRepository utilisateurRepository;
@@ -53,7 +55,7 @@ namespace backend.Controllers
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] Utilisateur user)
         {
-            user.User_id = id;
+            user.Id = id;
             utilisateurRepository.Update(user);
         }
 

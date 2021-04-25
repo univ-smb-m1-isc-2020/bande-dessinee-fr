@@ -23,23 +23,23 @@ namespace backend.Repositories
         public void Add(CreateUtilisateur user)
         {
             using IDbConnection dbConnection = GetConnection();
-            string sQuery = @"INSERT INTO utilisateur ( nom , prenom , email , motdepasse ) VALUES (@Nom, @Prenom, @Email, @MotDePasse) ;";
+            string sQuery = @"INSERT INTO utilisateurs ( nom , prenom , email , motdepasse ) VALUES (@Nom, @Prenom, @Email, @MotDePasse) ;";
             dbConnection.Open();
             dbConnection.Execute(sQuery, user);
         }
 
-        public Utilisateur Authenticate(Utilisateur user)
+        public Utilisateur Authenticate(AuthenticateUtilisateur authenticateUtilisateur)
         {
             using IDbConnection dbConnection = GetConnection();
-            string sQuery = @"SELECT * FROM utilisateur WHERE email = @Email AND motdepasse = @MotDePasse ;";
+            string sQuery = @"SELECT * FROM utilisateurs WHERE email = @Email AND motdepasse = @MotDePasse ;";
             dbConnection.Open();
-            return dbConnection.Query<Utilisateur>(sQuery, user).FirstOrDefault();
+            return dbConnection.Query<Utilisateur>(sQuery, authenticateUtilisateur).FirstOrDefault();
         }
 
         public IEnumerable<Utilisateur> GetAll()
         {
             using IDbConnection dbConnection = GetConnection();
-            string sQuery = @"SELECT * FROM utilisateur ;";
+            string sQuery = @"SELECT * FROM utilisateurs ;";
             dbConnection.Open();
             return dbConnection.Query<Utilisateur>(sQuery).AsEnumerable();
         }
@@ -47,7 +47,7 @@ namespace backend.Repositories
         public Utilisateur GetByEmail(string email)
         {
             using IDbConnection dbConnection = GetConnection();
-            string sQuery = @"SELECT * FROM utilisateur WHERE email = @Email ;";
+            string sQuery = @"SELECT * FROM utilisateurs WHERE email = @Email ;";
             dbConnection.Open();
             return dbConnection.Query<Utilisateur>(sQuery, new { Email = email }).FirstOrDefault();
         }
@@ -55,7 +55,7 @@ namespace backend.Repositories
         public Utilisateur GetById(int id)
         {
             using IDbConnection dbConnection = GetConnection();
-            string sQuery = @"SELECT * FROM utilisateur WHERE user_id = @Id;";
+            string sQuery = @"SELECT * FROM utilisateurs WHERE id = @Id;";
             dbConnection.Open();
             return dbConnection.Query<Utilisateur>(sQuery, new { Id = id }).FirstOrDefault();
         }
@@ -64,7 +64,7 @@ namespace backend.Repositories
         public void Delete(int id)
         {
             using IDbConnection dbConnection = GetConnection();
-            string sQuery = @"DELETE FROM utilisateur WHERE user_id = @Id;";
+            string sQuery = @"DELETE FROM utilisateurs WHERE id = @Id;";
             dbConnection.Open();
             dbConnection.Execute(sQuery, new { Id = id });
 
@@ -72,7 +72,7 @@ namespace backend.Repositories
         public void Update(Utilisateur user)
         {
             using IDbConnection dbConnection = GetConnection();
-            string sQuery = @"UPDATE utilisateur SET nom=@Nom,email=@Email,prenom=@Prenom,motdepasse=@MotDePasse WHERE user_id` = @User_id";
+            string sQuery = @"UPDATE utilisateurs SET nom=@Nom,email=@Email,prenom=@Prenom,motdepasse=@MotDePasse WHERE id = @ID";
             dbConnection.Open();
             dbConnection.Query(sQuery, user);
         }
