@@ -74,18 +74,19 @@ namespace backend
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-            });
+                
+                 });
 
-            app.UseRouting();
+                app.UseRouting();
 
-            app.UseAuthentication();
+                app.UseAuthentication();
 
-            app.UseAuthorization();
+                app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
-        }
+                app.UseEndpoints(endpoints =>
+                {
+                    endpoints.MapControllers();
+                });
+            }
     }
-}
+    }
