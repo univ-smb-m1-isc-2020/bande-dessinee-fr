@@ -118,7 +118,7 @@ namespace backend
 
                     int movie_id = moviesRepository.Add(createMovies);
                     if(item.Studios != null)
-                        foreach (var publisher in item.Studios)
+                        foreach (var publisher in item.Studios) 
                         {
                             var publishers = publishersRepository.GetByName(publisher.Name);
                             if (publishers != null)
