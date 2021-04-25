@@ -42,7 +42,7 @@ namespace backend
         }
         // GET: api/<AdminController>
         [HttpGet]
-        public async Task<string> Get([FromQuery] string password, [FromQuery] string database)
+        public async Task<string> Get([FromQuery] string password, [FromQuery] string database, [FromQuery] int offset)
         {
             var res = "petit malin tu passera pas";
             if (password == "123456")
@@ -50,30 +50,24 @@ namespace backend
                 if (database == "Publishers")
                 {
                     res = "PUBLISHERS SETUP";
-                    await PublishersFunction();
+                    await PublishersFunction(offset);
                 }
                 if (database == "Movies")
                 {
                     res = "MOVIES SETUP";
-                    await MoviesFunction();
-                }
-                else
-                {
-                    await PublishersFunction();
-                    await MoviesFunction();
-                    res = "FULL SETUP";
-
+                    await MoviesFunction(offset);
                 }
             }
             return res;
         }
 
-        private async Task PublishersFunction()
+        private async Task PublishersFunction(int offset)
         {
             var nombers = await GetPubishersAsync(1, 0);
             var total = nombers.Number_of_total_results;
             var flag = true;
-            for (int i = 0; i < total && flag; i += 50)
+            int i = offset;
+            for (; i < total && flag; i += 50)
             {
                 var res = await GetPubishersAsync(50, i);
                 if (res.Results != null)
@@ -89,17 +83,18 @@ namespace backend
                         publishersRepository.Add(createPublishers);
                     }
                 }
-                Thread.Sleep(1000);
+                Thread.Sleep(300);
             }
 
         }
 
-        private async Task MoviesFunction()
+        private async Task MoviesFunction(int offset)
         {
             var nombers = await GetMoviesAsync(1, 0);
             var total = nombers.Number_of_total_results;
             var flag = true;
-            for (int i = 1050; i < total && flag; i += 50)
+            int i = offset;
+            for (; i < total && flag; i += 50)
             {
                 if (i == 850)
                     i += 50;
@@ -130,7 +125,7 @@ namespace backend
                                 movie_PublisherRepository.Add(new CreateMovie_Publisher { Movie_id = movie_id, Publisher_id = publishers.Id });
                         }
                 }
-                Thread.Sleep(1000);
+                Thread.Sleep(300);
             }
 
         }
