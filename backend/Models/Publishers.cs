@@ -6,7 +6,7 @@ namespace backend.Models
     public class PaginationPublisher
     {
         public Pages Pages { get; set; }
-        public IEnumerable<Publishers> Movies { get; set; }
+        public IEnumerable<Publishers> Publishers { get; set; }
     }
     public class Publishers
     {
