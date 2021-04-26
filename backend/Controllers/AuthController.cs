@@ -76,7 +76,7 @@ namespace backend.Authentication
         [HttpPost]
         [AllowAnonymous]
         [Route("refresh")]
-        public IActionResult Refresh([FromBody] RefreshUtilisateur refreshUtilisateur)
+        public ActionResult<AuthenticationResponse> Refresh([FromBody] RefreshUtilisateur refreshUtilisateur)
         {
             AuthenticationResponse refreshToken = null;
 
