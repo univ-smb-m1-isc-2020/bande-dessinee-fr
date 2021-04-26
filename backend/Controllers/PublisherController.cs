@@ -18,7 +18,7 @@ namespace backend.Controllers
             _config = config;
             publishersRepository = new PublishersRepository(_config);
         }
-        // GET: api/<MovieController>
+
         [HttpGet]
         public PaginationPublisher Get([FromQuery] int page)
         {
@@ -30,7 +30,7 @@ namespace backend.Controllers
             return res;
         }
 
-        // GET api/<MovieController>/5
+
         [HttpGet("{id}")]
         public Publishers GetById(int id)
         {
