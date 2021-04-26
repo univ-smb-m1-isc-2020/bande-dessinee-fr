@@ -64,7 +64,7 @@ namespace backend.Repositories
             var limit = 50;
             var offset = limit * page;
             using IDbConnection dbConnection = GetConnection();
-            string sQuery = @"SELECT * FROM movies LIMIT @Limit OFFSET @Offset";
+            string sQuery = @"SELECT * FROM movies LIMIT @Limit OFFSET @Offset;";
             dbConnection.Open();
             return dbConnection.Query<Movies>(sQuery, new { Limit = limit, Offset = offset });
         }
