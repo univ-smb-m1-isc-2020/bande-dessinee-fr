@@ -71,7 +71,7 @@ namespace backend.Authentication
             }
             if (token == null)
                 return BadRequest(new { Toast = "Email déja utilisé" });
-            return Ok(new AuthenticationResponse { Token = authentication.Token, RefreshToken = authentication.RefreshToken });
+            return Ok(new AuthenticationResponse { Token = token.Token, RefreshToken = token.RefreshToken });
         }
         [HttpPost]
         [AllowAnonymous]
