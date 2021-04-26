@@ -10,6 +10,7 @@ namespace backend.Authentication
 {
     [Route("[controller]")]
     [ApiController]
+    [Authorize]
     public class AuthController : ControllerBase
     {
         private readonly IConfiguration _config;
