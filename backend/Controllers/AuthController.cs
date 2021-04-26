@@ -28,7 +28,7 @@ namespace backend.Authentication
         [HttpPost]
         [AllowAnonymous]
         [Route("login")]
-        public IActionResult Authenticate([FromBody] AuthenticateUtilisateur authenticateUtilisateur)
+        public ActionResult<AuthenticationResponse> Authenticate([FromBody] AuthenticateUtilisateur authenticateUtilisateur)
         {
             AuthenticationResponse authentication = null;
             if (ModelState.IsValid)
@@ -46,12 +46,12 @@ namespace backend.Authentication
                 else return Ok(new { Toast = "Email erroné" });
 
             }
-            return Ok(new { authentication.Token, authentication.RefreshToken, Toast = "Connection réussie" });
+            return Ok(new AuthenticationResponse { Token = authentication.Token, RefreshToken = authentication.RefreshToken }) ;
         }
         [HttpPost]
         [AllowAnonymous]
         [Route("register")]
-        public IActionResult Register([FromBody] CreateUtilisateur createUtilisateur)
+        public ActionResult<AuthenticationResponse> Register([FromBody] CreateUtilisateur createUtilisateur)
         {
             CreateUtilisateur utilisateur = new CreateUtilisateur
             {
@@ -70,8 +70,8 @@ namespace backend.Authentication
                 token = jwtAuthentication.Authenticate(new AuthenticateUtilisateur { Email = utilisateur.Email, MotDePasse = utilisateur.MotDePasse });
             }
             if (token == null)
-                return Ok(new { Toast = "Email déja utilisé" });
-            return Ok(new { token.Token, token.RefreshToken, Toast = "Création de compte réussi" });
+                return BadRequest(new { Toast = "Email déja utilisé" });
+            return Ok(new AuthenticationResponse { Token = authentication.Token, RefreshToken = authentication.RefreshToken });
         }
         [HttpPost]
         [AllowAnonymous]
@@ -88,7 +88,8 @@ namespace backend.Authentication
             if (refreshToken == null)
                 return Unauthorized();
 
-            return Ok(new { refreshToken.Token, refreshToken.RefreshToken, Toast = "Refresh réussi" });
+            return Ok(new AuthenticationResponse { Token = refreshToken.Token, RefreshToken = refreshToken.RefreshToken });
         }
     }
+
 }
