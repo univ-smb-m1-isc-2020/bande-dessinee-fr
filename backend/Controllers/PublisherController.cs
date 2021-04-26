@@ -27,7 +27,7 @@ namespace backend.Controllers
             var res = new PaginationPublisher
             {
                 Pages = publishersRepository.GetPages(),
-                Movies = publishersRepository.GetPage(page)
+                Publishers = publishersRepository.GetPage(page)
             };
             return res;
         }
