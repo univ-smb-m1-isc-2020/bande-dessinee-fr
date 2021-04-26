@@ -43,14 +43,14 @@ namespace backend.Repositories
             dbConnection.Open();
             return dbConnection.Query<Movies>(sQuery, new { Id = id }).FirstOrDefault();
         }
-/*        //SELECT id FROM movies ORDER BY id DESC LIMIT 1
-        public Movies GetLatest()
-        {
-            using IDbConnection dbConnection = GetConnection();
-            string sQuery = @"SELECT * FROM movies ORDER BY id DESC LIMIT 1;";
-            dbConnection.Open();
-            return dbConnection.Query<Movies>(sQuery).FirstOrDefault();
-        }*/
+        /*        //SELECT id FROM movies ORDER BY id DESC LIMIT 1
+                public Movies GetLatest()
+                {
+                    using IDbConnection dbConnection = GetConnection();
+                    string sQuery = @"SELECT * FROM movies ORDER BY id DESC LIMIT 1;";
+                    dbConnection.Open();
+                    return dbConnection.Query<Movies>(sQuery).FirstOrDefault();
+                }*/
         public Movies GetByName(string name)
         {
             using IDbConnection dbConnection = GetConnection();

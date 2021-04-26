@@ -1,5 +1,13 @@
-﻿namespace backend.Models
+﻿using System.Collections.Generic;
+
+namespace backend.Models
 {
+
+    public class PaginationPublisher
+    {
+        public Pages Pages { get; set; }
+        public IEnumerable<Publishers> Movies { get; set; }
+    }
     public class Publishers
     {
         public int Id { get; set; }

@@ -1,7 +1,6 @@
 ﻿using backend.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Text;
@@ -37,8 +36,6 @@ namespace backend.Authentication
                 return null;
             }
             var claimIdentity = principal.Claims.FirstOrDefault();
-            Console.WriteLine(claimIdentity.ToString());
-
             //type value                            valueType
             //"id",utilisateurFromBdd.Id.ToString(),ClaimValueTypes.Integer
 

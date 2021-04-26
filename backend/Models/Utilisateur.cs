@@ -29,4 +29,16 @@ namespace backend.Models
     {
         public string RefreshToken { get; set; }
     }
+    public class Utilisateur_Publisher
+    {
+        public int Id { get; set; }
+        public int Utilisateur_id { get; set; }
+        public int Publisher_id { get; set; }
+    }
+
+    public class CreateUtilisateur_Publisher
+    {
+        public int Utilisateur_id { get; set; }
+        public int Publisher_id { get; set; }
+    }
 }

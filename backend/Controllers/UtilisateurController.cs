@@ -12,58 +12,80 @@ namespace backend.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class UtilisateurController : ControllerBase
+    public class UtilisateurController : MyControllerBase
     {
         private readonly UtilisateurRepository utilisateurRepository;
+        private readonly Utilisateur_PublisherRepository utilisateur_PublisherRepository;
         private readonly IConfiguration _config;
+        private readonly NotificationRepository notificationRepository;
 
         public UtilisateurController(IConfiguration config)
         {
             _config = config;
             utilisateurRepository = new UtilisateurRepository(_config);
-        }
-        // GET: api/<UtilisateurController>
-        [HttpGet]
-        public IEnumerable<Utilisateur> Get()
-        {
-            return utilisateurRepository.GetAll();
+            utilisateur_PublisherRepository = new Utilisateur_PublisherRepository(config);
+            notificationRepository = new NotificationRepository(_config);
         }
 
         // GET api/<UtilisateurController>/5
-        [HttpGet("{id}")]
-        public Utilisateur Get(int id)
+        [HttpGet]
+        public Utilisateur Get([FromHeader(Name = "Authorization")] string token)
         {
-            return utilisateurRepository.GetById(id);
+            var jwtEncodedString = token[7..];
+            var user_id = GetUserID(_config, jwtEncodedString);
+            return utilisateurRepository.GetById(user_id);
         }
 
-        // POST api/<UtilisateurController>
-        [HttpPost]
-        public ActionResult<Utilisateur> Post([FromBody] CreateUtilisateur user)
+        [HttpGet]
+        [Route("notifications")]
+        public IEnumerable<Notifications> GetNotifications([FromHeader(Name = "Authorization")] string token)
         {
-            ActionResult res = BadRequest();
-            var itexists = utilisateurRepository.GetByEmail(user.Email);
+            var jwtEncodedString = token[7..];
+            var user_id = GetUserID(_config, jwtEncodedString);
+            return notificationRepository.GetUsersNotification(user_id);
+        }
+        [HttpDelete]
+        [Route("notifications")]
+        public void DeleteNotifications(int id, [FromHeader(Name = "Authorization")] string token)
+        {
+            var jwtEncodedString = token[7..];
+            var user_id = GetUserID(_config, jwtEncodedString);
+            notificationRepository.Delete(id);
+        }
+        [HttpPost]
+        [Route("like")]
+        public int AddLike([FromBody] CreateUtilisateur_Publisher createUtilisateur_Publisher, [FromHeader(Name = "Authorization")] string token)
+        {
+            var jwtEncodedString = token[7..];
+            var user_id = GetUserID(_config, jwtEncodedString);
+            createUtilisateur_Publisher.Utilisateur_id = user_id;
+            return utilisateur_PublisherRepository.Add(createUtilisateur_Publisher);
+        }
 
-            if (itexists == null)
-            {
-                utilisateurRepository.Add(user);
-                res = Ok(user);
-            }
-            return res;
+        [HttpDelete]
+        [Route("like")]
+        public void DeleteLike(int id)
+        {
+            utilisateur_PublisherRepository.Delete(id);
         }
 
         // PUT api/<UtilisateurController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Utilisateur user)
+        [HttpPut]
+        public void Put([FromHeader(Name = "Authorization")] string token, [FromBody] Utilisateur user)
         {
-            user.Id = id;
+            var jwtEncodedString = token[7..];
+            var user_id = GetUserID(_config, jwtEncodedString);
+            user.Id = user_id;
             utilisateurRepository.Update(user);
         }
 
         // DELETE api/<UtilisateurController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete]
+        public void Delete([FromHeader(Name = "Authorization")] string token)
         {
-            utilisateurRepository.Delete(id);
+            var jwtEncodedString = token[7..];
+            var user_id = GetUserID(_config, jwtEncodedString);
+            utilisateurRepository.Delete(user_id);
         }
     }
 }

@@ -13,17 +13,24 @@ namespace backend
     {
         private readonly MoviesRepository movieRepository;
         private readonly IConfiguration _config;
+        private readonly PublishersRepository publishersRepository;
+        private readonly Utilisateur_PublisherRepository utilisateur_PublisherRepository;
+        private readonly NotificationRepository notificationRepository;
+
         public MovieController(IConfiguration config)
         {
             _config = config;
             movieRepository = new MoviesRepository(_config);
+            publishersRepository = new PublishersRepository(_config);
+            utilisateur_PublisherRepository = new Utilisateur_PublisherRepository(_config);
+            notificationRepository = new NotificationRepository(_config);
         }
 
         // GET: api/<MovieController>
         [HttpGet]
-        public Pagination Get([FromQuery] int page)
+        public PaginationMovie Get([FromQuery] int page)
         {
-            var res = new Pagination
+            var res = new PaginationMovie
             {
                 Pages = movieRepository.GetPages(),
                 Movies = movieRepository.GetPage(page)
@@ -40,9 +47,27 @@ namespace backend
 
         // POST api/<MovieController>
         [HttpPost]
-        public void Post([FromBody] CreateMovies createMovies)
+        public void Post([FromBody] CreateMoviesAndPublisher createMoviesAndPublisher)
         {
-            movieRepository.Add(createMovies);
+            int movie_id = movieRepository.Add(new CreateMovies
+            {
+                Deck = createMoviesAndPublisher.Deck,
+                Description = createMoviesAndPublisher.Description,
+                Image = createMoviesAndPublisher.Image,
+                Name = createMoviesAndPublisher.Name,
+                Release_date = createMoviesAndPublisher.Release_date,
+            });
+            var publishers = publishersRepository.GetByName(createMoviesAndPublisher.Publisher);
+            if (publishers != null) NotifyUtilisateur(publishers, movie_id);
+        }
+
+        private void NotifyUtilisateur(Publishers publishers, int movie_id)
+        {
+            var utilisateur_Publishers = utilisateur_PublisherRepository.GetByPublisher(publishers.Id);
+            foreach (var notif in utilisateur_Publishers)
+            {
+                notificationRepository.Add(new CreateDeleteNotifications { Movie_id = movie_id, Utilisateur_id = notif.Utilisateur_id });
+            }
         }
 
         // PUT api/<MovieController>/5

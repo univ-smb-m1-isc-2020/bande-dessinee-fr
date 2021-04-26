@@ -50,14 +50,14 @@ namespace backend.Repositories
             return dbConnection.Query<Publishers>(sQuery, new { Name = name }).FirstOrDefault();
         }
 
-        public Publishers GetPage(int page)
+        public IEnumerable<Publishers> GetPage(int page)
         {
             var limit = 50;
             var offset = limit * page;
             using IDbConnection dbConnection = GetConnection();
             string sQuery = @"SELECT * FROM publishers LIMIT @Limit OFFSET @Offse'";
             dbConnection.Open();
-            return dbConnection.Query<Publishers>(sQuery, new { Limit = limit, Offset = offset }).FirstOrDefault();
+            return dbConnection.Query<Publishers>(sQuery, new { Limit = limit, Offset = offset });
         }
 
         public Pages GetPages()
@@ -78,9 +78,16 @@ namespace backend.Repositories
             dbConnection.Execute(sQuery, new { Id = id });
 
         }
-        public void Update(int id, Publishers publishers)
+        public void Update(int id, CreatePublishers createPublishers)
         {
-            publishers.Id = id;
+            Publishers publishers = new Publishers
+            {
+                Deck = createPublishers.Deck,
+                Description = createPublishers.Description,
+                Id = id,
+                Image = createPublishers.Image,
+                Name = createPublishers.Name,
+            };
             using IDbConnection dbConnection = GetConnection();
             string sQuery = @"UPDATE publishers SET deck = @Deck , description = @Description , image = @Image , name = @Name WHERE id = @Id;";
             dbConnection.Open();

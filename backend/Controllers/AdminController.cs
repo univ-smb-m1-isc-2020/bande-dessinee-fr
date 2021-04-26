@@ -22,7 +22,6 @@ namespace backend
         private readonly PublishersRepository publishersRepository;
         private readonly Movie_PublisherRepository movie_PublisherRepository;
         private readonly IConfiguration _config;
-        private readonly int maxLength = 8000;
         static HttpClient _client;
         public AdminController(IConfiguration config)
         {
@@ -108,17 +107,17 @@ namespace backend
                 foreach (var item in res.Results)
                 {
                     var createMovies = new CreateMovies
-                    { 
+                    {
                         Deck = item.Deck,
                         Image = item.Image.Medium_url,
                         Name = item.Name,
                         Release_date = item.Release_date
                     };
-                    
+
 
                     int movie_id = moviesRepository.Add(createMovies);
-                    if(item.Studios != null)
-                        foreach (var publisher in item.Studios) 
+                    if (item.Studios != null)
+                        foreach (var publisher in item.Studios)
                         {
                             var publishers = publishersRepository.GetByName(publisher.Name);
                             if (publishers != null)

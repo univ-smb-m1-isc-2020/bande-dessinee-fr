@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace backend.Models
 {
-    public class Pagination
+    public class PaginationMovie
     {
         public Pages Pages { get; set; }
         public IEnumerable<Movies> Movies { get; set; }
@@ -29,6 +29,16 @@ namespace backend.Models
         public string Name { get; set; }
         public string Release_date { get; set; }
     }
+    public class CreateMoviesAndPublisher
+    {
+        public string Deck { get; set; }
+        public string Description { get; set; }
+        public string Image { get; set; }
+        public string Name { get; set; }
+        public string Release_date { get; set; }
+        public string Publisher { get; set; }
+    }
+
     public class GetId
     {
         [Key]
