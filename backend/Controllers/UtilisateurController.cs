@@ -150,8 +150,11 @@ namespace backend.Controllers
         }
 
         [HttpGet("like")]
-        public IEnumerable<Utilisateur_Publisher> GetLike([FromHeader(Name = "Authorization")] string token)
+        public IEnumerable<Utilisateur_Publisher> GetLike()
         {
+            
+            Request.Headers.TryGetValue("Authorization",out Microsoft.Extensions.Primitives.StringValues token2);
+            var token = token2.ToString();
             var jwtEncodedString = token[7..];
             var tokenHandler = new JwtSecurityTokenHandler();
             var principal = tokenHandler.ValidateToken(jwtEncodedString, new TokenValidationParameters
