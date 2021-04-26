@@ -5,9 +5,9 @@ WORKDIR /app
 
 FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
 WORKDIR /src
-COPY ["backend/backend.csproj", "."]
+COPY ["backend.csproj", "."]
 RUN dotnet restore "./backend.csproj"
-COPY backend .
+COPY . .
 WORKDIR "/src/."
 RUN dotnet build "backend.csproj" -c Release -o /app/build
 
