@@ -42,6 +42,13 @@ namespace backend.Repositories
             dbConnection.Open();
             return dbConnection.Query<Utilisateur_Publisher>(sQuery, new { Publisher_id = id }).AsEnumerable();
         }
+        public IEnumerable<Utilisateur_Publisher> GetByUser(int id)
+        {
+            using IDbConnection dbConnection = GetConnection();
+            string sQuery = @"SELECT * FROM utilisateur_publisher WHERE utilisateur_id = @Utilisateur_id;";
+            dbConnection.Open();
+            return dbConnection.Query<Utilisateur_Publisher>(sQuery, new { Utilisateur_id = id }).AsEnumerable();
+        }
         public Utilisateur_Publisher Get(int id)
         {
             using IDbConnection dbConnection = GetConnection();

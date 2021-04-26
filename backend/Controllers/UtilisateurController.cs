@@ -148,6 +148,29 @@ namespace backend.Controllers
             var user_id = int.Parse(claimIdentity.Value);
             notificationRepository.Delete(id);
         }
+
+        [HttpGet("like")]
+        public IEnumerable<Utilisateur_Publisher> GetLike([FromHeader(Name = "Authorization")] string token)
+        {
+            var jwtEncodedString = token[7..];
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var principal = tokenHandler.ValidateToken(jwtEncodedString, new TokenValidationParameters
+            {
+                ValidateIssuer = false,
+                ValidateAudience = false,
+                ValidateIssuerSigningKey = true,
+                ValidateLifetime = true,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_config["Jwt:Key"]))
+            }, out SecurityToken validatedToken);
+
+            if (!(validatedToken is JwtSecurityToken jwtToken) || !jwtToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256))
+            {
+                throw new SecurityTokenException("Invalid token");
+            }
+            var claimIdentity = principal.Claims.FirstOrDefault();
+            var user_id = int.Parse(claimIdentity.Value);
+            return utilisateur_PublisherRepository.GetByUser(user_id);
+        }
         /// <summary>
         /// Post a like
         /// </summary>
