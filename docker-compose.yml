@@ -17,7 +17,7 @@ services:
         image: docker.pkg.github.com/univ-smb-m1-isc-2020/bande-dessinee-fr/bande-dessinee-fr:latest
         restart: always
         volumes:
-            - "./dist/frontend:/usr/share/nginx/html"
+            - "./frontend/dist/frontend:/usr/share/nginx/html"
         ports:
             - 8080:8080
         depends_on:

@@ -7,7 +7,7 @@ import { AuthenticateUtilisateur, Client} from '../classes/client';
 })
 export class AuthService {
 
-  client = new Client("https://info806.visarsylejmani.com",{fetch()});
+  client = new Client("localhost:8080/api");
   constructor() { }
 
   async login(email, password) {
