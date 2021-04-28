@@ -37,7 +37,7 @@ namespace backend
                 });
                 options.SwaggerGeneratorOptions.Servers = new List<OpenApiServer> {
                     new OpenApiServer {
-                    Url = "https://bande-dessinee-fr.oups.net/api/"
+                        Url = "https://bande-dessinee-fr.oups.net/api/"
                     },
                     new OpenApiServer {
                         Url = "http://bande-dessinee-fr-backend/"
@@ -94,7 +94,7 @@ namespace backend
             // specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("https://bande-dessinee-fr.oups.net/api/swagger/v1/swagger.json", "My API V1");
+                c.SwaggerEndpoint("/api/swagger/v1/swagger.json", "My API V1");
 
             });
 

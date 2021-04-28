@@ -1,4 +1,3 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticateUtilisateur, Client, CreateUtilisateur} from '../classes/client';
@@ -37,4 +36,13 @@ export class AuthService {
     }
   }
 
+  async signout() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("refreshToken");
+    this.router.navigate(["/","signin"]);
+  }
+
+  isloggedin(){
+    return localStorage.getItem("token").length > 20;
+  }
 }

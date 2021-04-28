@@ -13,16 +13,17 @@ import { DashboardNavComponent } from './components/dashboardpage/dashboard-nav/
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule , ReactiveFormsModule} from '@angular/forms';
 import { AuthService } from './services/auth.service';
-import { NavComponent } from './components/nav/nav.component';
 import { MoviesComponent } from './components/movies/movies.component';
 import { PublishersComponent } from './components/publishers/publishers.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { SigninpageComponent } from './components/signinpage/signinpage.component';
 import { MovieComponent } from './components/movie/movie.component';
+import { NavComponent } from './components/nav/nav.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    NavComponent,
     AdminpageComponent,
     SignuppageComponent,
     PageNotFoundComponent,
@@ -30,7 +31,6 @@ import { MovieComponent } from './components/movie/movie.component';
     AddComponent,
     SettingsComponent,
     DashboardNavComponent,
-    NavComponent,
     MoviesComponent,
     PublishersComponent,
     NotificationsComponent,

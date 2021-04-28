@@ -1,0 +1,41 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class=" col-md-6" id="gauche-col" style="position: relative;">
+            <h1 class="display-1"
+                style="border-radius: 20%; padding: 5%;background-color: rgba(255, 255, 255, 0.5);width: 80%;position: absolute; top: 50%; left: 50%; transform: translate(-50% ,-50%);">
+                Bienvenu sur <span style="color: brown;">"LE"</span> site web des comics !
+                <h1 class="display-3"> Rejoins nous !</h1>
+                <p class="lead" style="color: brown; font-weight:900; font-style: italic; font-size: 2rem;"> “I still
+                    believe in heroes.”</p>
+            </h1>
+        </div>
+        <div class="col-md-6 m-0 p-0" id="droit-col">
+            <div class="m-0 p-0"
+                style="background-color: rgba(255, 255, 255, 0.5); height: 100%; width: 100%; position: relative;">
+                <form [formGroup]="SignInForm" (ngSubmit)="login()" class="rounded p-3" style=" background-color:rgba(255, 255, 255, 0.8); width: 80%;position: absolute; top: 50%; left: 50%; transform: translate(-50% ,-50%);">
+                    <div class="mb-3">
+                        <h2 class="display-5">Se connecter</h2>
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputEmail" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="inputEmail" formControlName="inputEmail" placeholder="name@example.com" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputPassword" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="inputPassword" formControlName="inputPassword" placeholder="**********" required>
+                    </div>
+                    <div class="mb-3 form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="switchResterConnecte" formControlName="switchResterConnecte">
+                        <label class="form-check-label" for="switchResterConnecte">Rester connecté</label>
+                      </div>
+                    <div class="mb-3 d-flex justify-content-between">
+                        <a routerLink="/inscription" class="text-decoration-none">Créer un compte</a>
+                        <button type="submit" class="btn btn-primary">
+                            Suivant
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
