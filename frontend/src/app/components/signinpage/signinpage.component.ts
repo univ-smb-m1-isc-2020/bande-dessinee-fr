@@ -6,8 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-signinpage',
   templateUrl: './signinpage.component.html',
-  styles: [
-    `
+  styles: [`
     div#gauche-col{
       min-height: 100vh;
       overflow: auto;
@@ -21,9 +20,7 @@ import { AuthService } from 'src/app/services/auth.service';
       background-image:url("https://images.pexels.com/photos/3744196/pexels-photo-3744196.jpeg?auto=compress&cs=tinysrgb&h=650&w=940");
       background-size:cover;
       background-position: right 0% bottom 0%;
-    }
-    `
-  ]
+    }`]
 })
 export class SigninpageComponent implements OnInit {
 
@@ -45,7 +42,7 @@ export class SigninpageComponent implements OnInit {
     console.log("Email = " + this.SignInForm.value["inputEmail"]);
     console.log("Password = " + this.SignInForm.value["inputPassword"]);
     console.log("Rester connecté = " + this.SignInForm.value["switchResterConnecte"]);
-    this.auth.login(this.SignInForm.value["inputEmail"], this.SignInForm.value["inputPassword"],this.SignInForm.value["switchResterConnecte"]);
+    this.auth.login(this.SignInForm.value["inputEmail"], this.SignInForm.value["inputPassword"]);
     this.SignInForm.reset();
   }
 }

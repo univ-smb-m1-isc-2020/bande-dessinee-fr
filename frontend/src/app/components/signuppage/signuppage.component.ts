@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-signuppage',
@@ -16,9 +19,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignuppageComponent implements OnInit {
 
-  constructor() { }
+  SignUpForm = this.formBuilder.group({
+    inputNom: '',
+    inputPrenom: '',
+    inputEmail: '',
+    inputPassword: '',
+    inputConfirmPassword: '',
+  });
+  constructor(private formBuilder:FormBuilder,private router:Router,private auth:AuthService) { }
 
   ngOnInit(): void {
+    if (localStorage.getItem("token") && localStorage.getItem("refreshToken")) {
+      this.router.navigate(["movies"]);
+    }
   }
 
+
+  signup(){
+    if(this.SignUpForm.value["inputPassword"] == this.SignUpForm.value["inputPassword"]){
+      this.auth.register(this.SignUpForm.value["inputNom"], this.SignUpForm.value["inputPrenom"],this.SignUpForm.value["inputEmail"], this.SignUpForm.value["inputPassword"] );
+      this.SignUpForm.reset();
+    }
+
+  }
 }
