@@ -1,3 +1,4 @@
+using api.Tasks;
 using backend.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -55,7 +56,9 @@ namespace backend
 
             services.AddSingleton<ITokenRefresher>(x => new TokenRefresher(Configuration));
 
+            services.AddSingleton<IDoWorkPostgresDB, DoWorkPostgresDB>();
 
+            services.AddHostedService<PostgresDBTask>();
 
         }
 

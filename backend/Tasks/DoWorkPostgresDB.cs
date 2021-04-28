@@ -25,7 +25,7 @@ namespace api.Tasks
             };
 
             // Create a buffer of 32 bytes of data to be transmitted.
-            string data = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+            string data = "something";
             byte[] buffer = Encoding.ASCII.GetBytes(data);
             int timeout = 120;
             PingReply reply = pingSender.Send("postgres", timeout, buffer, options);
@@ -37,7 +37,7 @@ namespace api.Tasks
                 Console.WriteLine("Don't fragment: {0}", reply.Options.DontFragment);
                 Console.WriteLine("Buffer size: {0}", reply.Buffer.Length);
             }
-            EnsureDatabase.For.PostgresqlDatabase("Server="+ reply.Address.ToString()+";Port=5432;Database=db_bande_dessinee_fr;User Id=bande_dessinee_fr_root;Password=toor;");
+            EnsureDatabase.For.PostgresqlDatabase("Server=postgres;Port=5432;Database=db_bande_dessinee_fr;User Id=bande_dessinee_fr_root;Password=toor;");
 
             var upgrader = DeployChanges
                 .To
