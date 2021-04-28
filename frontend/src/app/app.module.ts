@@ -11,6 +11,10 @@ import { HomeComponent } from './components/dashboardpage/home/home.component';
 import { AddComponent } from './components/dashboardpage/add/add.component';
 import { SettingsComponent } from './components/dashboardpage/settings/settings.component';
 import { DashboardNavComponent } from './components/dashboardpage/dashboard-nav/dashboard-nav.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {TokenInterceptorService} from './services/token-interceptor.service'
+import { FormsModule , ReactiveFormsModule} from '@angular/forms';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -22,13 +26,20 @@ import { DashboardNavComponent } from './components/dashboardpage/dashboard-nav/
     HomeComponent,
     AddComponent,
     SettingsComponent,
-    DashboardNavComponent
+    DashboardNavComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    AppRoutingModule,
   ],
-  providers: [],
+  providers: [AuthService,{
+    provide: HTTP_INTERCEPTORS,
+    useClass:TokenInterceptorService,
+    multi:true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

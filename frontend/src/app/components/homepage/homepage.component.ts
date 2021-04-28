@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormBuilder } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-homepage',
@@ -24,9 +27,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomepageComponent implements OnInit {
 
-  constructor() { }
+  SignInForm = this.formBuilder.group({
+    inputEmail: '',
+    inputPassword: '',
+    switchResterConnecte: false
+  });
+
+  constructor(private router: Router, private auth: AuthService, public formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+    if (localStorage.getItem("token") && localStorage.getItem("refreshToken")) {
+      this.router.navigate(["movies"]);
+    }
   }
 
+  login() {
+    console.log("Email = " + this.SignInForm.value["inputEmail"]);
+    console.log("Password = " + this.SignInForm.value["inputPassword"]);
+    console.log("Rester connecté = " + this.SignInForm.value["switchResterConnecte"]);
+    this.auth.login(this.SignInForm.value["inputEmail"], this.SignInForm.value["inputPassword"]);
+    this.SignInForm.reset();
+  }
 }
