@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
-  selector: 'app-homepage',
-  templateUrl: './homepage.component.html',
+  selector: 'app-signinpage',
+  templateUrl: './signinpage.component.html',
   styles: [
     `
     div#gauche-col{
@@ -25,7 +25,7 @@ import { AuthService } from 'src/app/services/auth.service';
     `
   ]
 })
-export class HomepageComponent implements OnInit {
+export class SigninpageComponent implements OnInit {
 
   SignInForm = this.formBuilder.group({
     inputEmail: '',
@@ -45,7 +45,7 @@ export class HomepageComponent implements OnInit {
     console.log("Email = " + this.SignInForm.value["inputEmail"]);
     console.log("Password = " + this.SignInForm.value["inputPassword"]);
     console.log("Rester connecté = " + this.SignInForm.value["switchResterConnecte"]);
-    this.auth.login(this.SignInForm.value["inputEmail"], this.SignInForm.value["inputPassword"]);
+    this.auth.login(this.SignInForm.value["inputEmail"], this.SignInForm.value["inputPassword"],this.SignInForm.value["switchResterConnecte"]);
     this.SignInForm.reset();
   }
 }

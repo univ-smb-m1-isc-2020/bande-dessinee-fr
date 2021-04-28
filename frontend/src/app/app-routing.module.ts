@@ -6,17 +6,25 @@ import { HomeComponent } from './components/dashboardpage/home/home.component';
 import { AddComponent } from './components/dashboardpage/add/add.component';
 import { SettingsComponent } from './components/dashboardpage/settings/settings.component';
 //Home Components
-import { HomepageComponent } from './components/homepage/homepage.component'
 import { SignuppageComponent } from './components/signuppage/signuppage.component'
 
 
 //Page Not Found Component
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component'
+import { SigninpageComponent } from './components/signinpage/signinpage.component';
+import { MoviesComponent } from './components/movies/movies.component';
+import { PublishersComponent } from './components/publishers/publishers.component';
+import { NotificationsComponent } from './components/notifications/notifications.component';
+import { MovieComponent } from './components/movie/movie.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home',pathMatch:'full'},
-  { path: 'home', component: HomepageComponent }, 
-  { path: 'inscription', component: SignuppageComponent },
+  { path: '', redirectTo: '/signin',pathMatch:'full'},
+  { path: 'signin', component: SigninpageComponent }, 
+  { path: 'signup', component: SignuppageComponent },
+  { path: 'movies', component: MoviesComponent },
+  { path: 'publishers', component: PublishersComponent },
+  { path: 'notifications', component: NotificationsComponent },
+  { path: 'movie', component: MovieComponent },
   {
     path: 'admin',
     component: AdminpageComponent,

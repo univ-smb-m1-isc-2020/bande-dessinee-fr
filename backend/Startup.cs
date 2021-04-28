@@ -7,6 +7,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using System.Collections.Generic;
 using System.Text;
 
 namespace backend
@@ -25,7 +27,23 @@ namespace backend
         {
             services.AddControllers();
 
-            services.AddSwaggerGen();
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "ESFenfants API",
+                    Description = "Cette API est utilise pour ESFenfants",
+                    Version = "V1.0.0"
+                });
+                options.SwaggerGeneratorOptions.Servers = new List<OpenApiServer> {
+                    new OpenApiServer {
+                    Url = "https://bande-dessinee-fr.oups.net/api/"
+                    },
+                    new OpenApiServer {
+                        Url = "http://bande-dessinee-fr-backend/"
+                    }
+                };
+            });
 
             services.AddCors(options =>
             {
@@ -76,7 +94,7 @@ namespace backend
             // specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.SwaggerEndpoint("https://bande-dessinee-fr.oups.net/swagger/v1/swagger.json", "My API V1");
 
             });
 

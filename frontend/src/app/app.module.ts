@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomepageComponent } from './components/homepage/homepage.component';
 import { AdminpageComponent } from './components/adminpage/adminpage.component';
 import { SignuppageComponent } from './components/signuppage/signuppage.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
@@ -11,15 +10,19 @@ import { HomeComponent } from './components/dashboardpage/home/home.component';
 import { AddComponent } from './components/dashboardpage/add/add.component';
 import { SettingsComponent } from './components/dashboardpage/settings/settings.component';
 import { DashboardNavComponent } from './components/dashboardpage/dashboard-nav/dashboard-nav.component';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import {TokenInterceptorService} from './services/token-interceptor.service'
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule , ReactiveFormsModule} from '@angular/forms';
 import { AuthService } from './services/auth.service';
+import { NavComponent } from './components/nav/nav.component';
+import { MoviesComponent } from './components/movies/movies.component';
+import { PublishersComponent } from './components/publishers/publishers.component';
+import { NotificationsComponent } from './components/notifications/notifications.component';
+import { SigninpageComponent } from './components/signinpage/signinpage.component';
+import { MovieComponent } from './components/movie/movie.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomepageComponent,
     AdminpageComponent,
     SignuppageComponent,
     PageNotFoundComponent,
@@ -27,6 +30,12 @@ import { AuthService } from './services/auth.service';
     AddComponent,
     SettingsComponent,
     DashboardNavComponent,
+    NavComponent,
+    MoviesComponent,
+    PublishersComponent,
+    NotificationsComponent,
+    SigninpageComponent,
+    MovieComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,11 +44,7 @@ import { AuthService } from './services/auth.service';
     HttpClientModule,
     AppRoutingModule,
   ],
-  providers: [AuthService,{
-    provide: HTTP_INTERCEPTORS,
-    useClass:TokenInterceptorService,
-    multi:true
-  }],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
