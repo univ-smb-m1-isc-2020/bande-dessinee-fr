@@ -94,7 +94,7 @@ namespace backend
             // specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("https://bande-dessinee-fr.oups.net/swagger/v1/swagger.json", "My API V1");
+                c.SwaggerEndpoint("https://bande-dessinee-fr.oups.net/api/swagger/v1/swagger.json", "My API V1");
 
             });
 
