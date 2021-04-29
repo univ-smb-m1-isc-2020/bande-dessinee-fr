@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Notifications } from 'src/app/classes/client';
+import { UtilisateurService } from 'src/app/services/utilisateur.service';
 
 @Component({
   selector: 'app-notifications',
@@ -7,10 +9,12 @@ import { Component, OnInit } from '@angular/core';
   ]
 })
 export class NotificationsComponent implements OnInit {
+  notifications$: Promise<Notifications[]>;
 
-  constructor() { }
+  constructor(private utilisateurService:UtilisateurService) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    this.notifications$ = this.utilisateurService.notifications();
   }
 
 }

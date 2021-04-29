@@ -16,4 +16,7 @@ export class UtilisateurService {
     t.utilisateur_id = utilisateur_id;
     this.client.like(localStorage.getItem("token"),t);
   }
+  async notifications(){
+    return await this.client.notificationsAll(localStorage.getItem("token"));
+  }
 }
