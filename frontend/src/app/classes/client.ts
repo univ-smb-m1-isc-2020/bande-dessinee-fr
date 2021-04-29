@@ -198,7 +198,7 @@ export class Client {
         let options_ = <RequestInit>{
             method: "GET",
             headers: {
-                "Authorization": "Bearer " + localStorage.getItem("token"),
+                "Authorization": "Bearer" + localStorage.getItem("token"),
                 "Accept": "text/plain"
             }
         };

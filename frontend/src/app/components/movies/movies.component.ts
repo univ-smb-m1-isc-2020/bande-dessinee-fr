@@ -10,12 +10,12 @@ import { MoviesService } from 'src/app/services/movies.service';
 })
 export class MoviesComponent implements OnInit {
 
-  page: PaginationMovie;
+
+  page: Promise<PaginationMovie>;
   constructor(private moviesService : MoviesService) { }
 
   async ngOnInit(): Promise<void> {
-    this.page = await this.moviesService.getPage(0);
-    this.page.pages.nb_Pages
+    this.page = this.moviesService.getPage(0);
   }
 
 }
