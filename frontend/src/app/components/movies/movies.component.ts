@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PaginationMovie } from 'src/app/classes/client';
+import { MoviesService } from 'src/app/services/movies.service';
 
 @Component({
   selector: 'app-movies',
@@ -8,9 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MoviesComponent implements OnInit {
 
-  constructor() { }
+  page: PaginationMovie;
+  constructor(private moviesService : MoviesService) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    this.page = await this.moviesService.getPage(0);
+    this.page.pages.nb_Pages
   }
 
 }

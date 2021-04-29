@@ -13,3 +13,9 @@
         </div>
     </div>
 </div>
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <li *ngFor="let item of this.page.pages.nb_Pages | async" class="page-item"><a [routerLink]="['/movies', 1]">item</a></li>
+    </ul>
+  </nav>

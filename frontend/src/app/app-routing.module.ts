@@ -21,10 +21,11 @@ const routes: Routes = [
   { path: '', redirectTo: '/signin',pathMatch:'full'},
   { path: 'signin', component: SigninpageComponent }, 
   { path: 'signup', component: SignuppageComponent },
-  { path: 'movies', component: MoviesComponent },
   { path: 'publishers', component: PublishersComponent },
   { path: 'notifications', component: NotificationsComponent },
-  { path: 'movies/:id', component: MovieComponent },
+  { path: 'movies/:id', component: MoviesComponent },
+  { path: 'movie/:id', component: MovieComponent },
+  
   {
     path: 'admin',
     component: AdminpageComponent,
