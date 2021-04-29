@@ -15,7 +15,17 @@ export class MoviesComponent implements OnInit {
   constructor(private moviesService : MoviesService) { }
 
   async ngOnInit(): Promise<void> {
-    this.moviesService.getPage(0).then(o=>this.movies$ = o.movies );
+    this.moviesService.getPage(0).then(o=>o.movies.forEach(o=>{
+      var t = new Movies();
+      t.deck = o.deck;
+      t.description = o.description;
+      t.id = o.id;
+      t.image = o.image;
+      t.name = o.name;
+      t.release_date = o.release_date;
+
+      this.movies$.push(t);
+    }));
   }
 
 }
