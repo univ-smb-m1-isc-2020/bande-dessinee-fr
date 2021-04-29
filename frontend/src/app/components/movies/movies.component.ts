@@ -22,7 +22,7 @@ export class MoviesComponent implements OnInit {
   }
 
   goToMovie(id){
-    this.router.navigate(["/movies",id]);
+    this.router.navigate(["movies",id]);
   }
 
 }
