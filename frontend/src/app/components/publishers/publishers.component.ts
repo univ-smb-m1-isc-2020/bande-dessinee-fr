@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PaginationPublisher, Publishers } from 'src/app/classes/client';
+import { PublishersService } from 'src/app/services/publishers.service';
 
 @Component({
   selector: 'app-publishers',
@@ -8,9 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PublishersComponent implements OnInit {
 
-  constructor() { }
+  publishers$ : Promise<PaginationPublisher>;
+
+  constructor(private publishersService: PublishersService) { }
 
   ngOnInit(): void {
+    this.publishers$ = this.publishersService.getPage(0);
   }
 
 }
