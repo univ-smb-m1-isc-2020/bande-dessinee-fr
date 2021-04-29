@@ -23,7 +23,7 @@ export class Client {
      * @param offset (optional) 
      * @return Success
      */
-    async admin(password: string | undefined, database: string | undefined, offset: number | undefined): Promise<string> {
+    admin(password: string | undefined, database: string | undefined, offset: number | undefined): Promise<string> {
         let url_ = this.baseUrl + "/Admin?";
         if (password === null)
             throw new Error("The parameter 'password' cannot be null.");
@@ -46,22 +46,25 @@ export class Client {
             }
         };
 
-        const _response = await this.http.fetch(url_, options_);
-        return await this.processAdmin(_response);
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processAdmin(_response);
+        });
     }
 
-    protected async processAdmin(response: Response): Promise<string> {
+    protected processAdmin(response: Response): Promise<string> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
-            const _responseText = await response.text();
+            return response.text().then((_responseText) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             result200 = resultData200 !== undefined ? resultData200 : <any>null;
             return result200;
+            });
         } else if (status !== 200 && status !== 204) {
-            const _responseText_1 = await response.text();
-            return throwException("An unexpected server error occurred.", status, _responseText_1, _headers);
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
         }
         return Promise.resolve<string>(<any>null);
     }
@@ -70,7 +73,7 @@ export class Client {
      * @param body (optional) 
      * @return Success
      */
-    async login(body: AuthenticateUtilisateur | undefined): Promise<AuthenticationResponse> {
+    login(body: AuthenticateUtilisateur | undefined): Promise<AuthenticationResponse> {
         let url_ = this.baseUrl + "/Auth/login";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -85,22 +88,25 @@ export class Client {
             }
         };
 
-        const _response = await this.http.fetch(url_, options_);
-        return await this.processLogin(_response);
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processLogin(_response);
+        });
     }
 
-    protected async processLogin(response: Response): Promise<AuthenticationResponse> {
+    protected processLogin(response: Response): Promise<AuthenticationResponse> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
-            const _responseText = await response.text();
+            return response.text().then((_responseText) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             result200 = AuthenticationResponse.fromJS(resultData200);
             return result200;
+            });
         } else if (status !== 200 && status !== 204) {
-            const _responseText_1 = await response.text();
-            return throwException("An unexpected server error occurred.", status, _responseText_1, _headers);
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
         }
         return Promise.resolve<AuthenticationResponse>(<any>null);
     }
@@ -109,7 +115,7 @@ export class Client {
      * @param body (optional) 
      * @return Success
      */
-    async register(body: CreateUtilisateur | undefined): Promise<AuthenticationResponse> {
+    register(body: CreateUtilisateur | undefined): Promise<AuthenticationResponse> {
         let url_ = this.baseUrl + "/Auth/register";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -124,22 +130,25 @@ export class Client {
             }
         };
 
-        const _response = await this.http.fetch(url_, options_);
-        return await this.processRegister(_response);
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processRegister(_response);
+        });
     }
 
-    protected async processRegister(response: Response): Promise<AuthenticationResponse> {
+    protected processRegister(response: Response): Promise<AuthenticationResponse> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
-            const _responseText = await response.text();
+            return response.text().then((_responseText) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             result200 = AuthenticationResponse.fromJS(resultData200);
             return result200;
+            });
         } else if (status !== 200 && status !== 204) {
-            const _responseText_1 = await response.text();
-            return throwException("An unexpected server error occurred.", status, _responseText_1, _headers);
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
         }
         return Promise.resolve<AuthenticationResponse>(<any>null);
     }
@@ -148,7 +157,7 @@ export class Client {
      * @param body (optional) 
      * @return Success
      */
-    async refresh(body: RefreshUtilisateur | undefined): Promise<AuthenticationResponse> {
+    refresh(body: RefreshUtilisateur | undefined): Promise<AuthenticationResponse> {
         let url_ = this.baseUrl + "/Auth/refresh";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -163,22 +172,25 @@ export class Client {
             }
         };
 
-        const _response = await this.http.fetch(url_, options_);
-        return await this.processRefresh(_response);
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processRefresh(_response);
+        });
     }
 
-    protected async processRefresh(response: Response): Promise<AuthenticationResponse> {
+    protected processRefresh(response: Response): Promise<AuthenticationResponse> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
-            const _responseText = await response.text();
+            return response.text().then((_responseText) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             result200 = AuthenticationResponse.fromJS(resultData200);
             return result200;
+            });
         } else if (status !== 200 && status !== 204) {
-            const _responseText_1 = await response.text();
-            return throwException("An unexpected server error occurred.", status, _responseText_1, _headers);
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
         }
         return Promise.resolve<AuthenticationResponse>(<any>null);
     }
@@ -187,7 +199,7 @@ export class Client {
      * @param page (optional) 
      * @return Success
      */
-    async movieGetPage(page: number | undefined): Promise<PaginationMovie> {
+    movieAll(page: number | undefined): Promise<Movies[]> {
         let url_ = this.baseUrl + "/Movie?";
         if (page === null)
             throw new Error("The parameter 'page' cannot be null.");
@@ -198,36 +210,42 @@ export class Client {
         let options_ = <RequestInit>{
             method: "GET",
             headers: {
-                "Authorization": "Bearer" + localStorage.getItem("token"),
                 "Accept": "text/plain"
             }
         };
 
-        const _response = await this.http.fetch(url_, options_);
-        return await this.processMovie(_response);
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processMovieAll(_response);
+        });
     }
 
-    protected async processMovie(response: Response): Promise<PaginationMovie> {
+    protected processMovieAll(response: Response): Promise<Movies[]> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
-            const _responseText = await response.text();
+            return response.text().then((_responseText) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = PaginationMovie.fromJS(resultData200);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200!.push(Movies.fromJS(item));
+            }
             return result200;
+            });
         } else if (status !== 200 && status !== 204) {
-            const _responseText_1 = await response.text();
-            return throwException("An unexpected server error occurred.", status, _responseText_1, _headers);
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
         }
-        return Promise.resolve<PaginationMovie>(<any>null);
+        return Promise.resolve<Movies[]>(<any>null);
     }
 
     /**
      * @param body (optional) 
      * @return Success
      */
-    async movieCreate(body: CreateMoviesAndPublisher | undefined): Promise<void> {
+    movie(body: CreateMoviesAndPublisher | undefined): Promise<void> {
         let url_ = this.baseUrl + "/Movie";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -241,19 +259,22 @@ export class Client {
             }
         };
 
-        const _response = await this.http.fetch(url_, options_);
-        return await this.processMovie2(_response);
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processMovie(_response);
+        });
     }
 
-    protected async processMovie2(response: Response): Promise<void> {
+    protected processMovie(response: Response): Promise<void> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
-            const _responseText = await response.text();
+            return response.text().then((_responseText) => {
             return;
+            });
         } else if (status !== 200 && status !== 204) {
-            const _responseText_1 = await response.text();
-            return throwException("An unexpected server error occurred.", status, _responseText_1, _headers);
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
         }
         return Promise.resolve<void>(<any>null);
     }
@@ -261,7 +282,7 @@ export class Client {
     /**
      * @return Success
      */
-    async movieGetById(id: number): Promise<Movies> {
+    movie2(id: number): Promise<Movies> {
         let url_ = this.baseUrl + "/Movie/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -275,22 +296,25 @@ export class Client {
             }
         };
 
-        const _response = await this.http.fetch(url_, options_);
-        return await this.processMovie3(_response);
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processMovie2(_response);
+        });
     }
 
-    protected async processMovie3(response: Response): Promise<Movies> {
+    protected processMovie2(response: Response): Promise<Movies> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
-            const _responseText = await response.text();
+            return response.text().then((_responseText) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             result200 = Movies.fromJS(resultData200);
             return result200;
+            });
         } else if (status !== 200 && status !== 204) {
-            const _responseText_1 = await response.text();
-            return throwException("An unexpected server error occurred.", status, _responseText_1, _headers);
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
         }
         return Promise.resolve<Movies>(<any>null);
     }
@@ -299,7 +323,7 @@ export class Client {
      * @param body (optional) 
      * @return Success
      */
-    async movieUpdate(id: number, body: CreateMovies | undefined): Promise<void> {
+    movie3(id: number, body: CreateMovies | undefined): Promise<void> {
         let url_ = this.baseUrl + "/Movie/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -316,19 +340,22 @@ export class Client {
             }
         };
 
-        const _response = await this.http.fetch(url_, options_);
-        return await this.processMovie4(_response);
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processMovie3(_response);
+        });
     }
 
-    protected async processMovie4(response: Response): Promise<void> {
+    protected processMovie3(response: Response): Promise<void> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
-            const _responseText = await response.text();
+            return response.text().then((_responseText) => {
             return;
+            });
         } else if (status !== 200 && status !== 204) {
-            const _responseText_1 = await response.text();
-            return throwException("An unexpected server error occurred.", status, _responseText_1, _headers);
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
         }
         return Promise.resolve<void>(<any>null);
     }
@@ -336,7 +363,7 @@ export class Client {
     /**
      * @return Success
      */
-    async movie5(id: number): Promise<void> {
+    movie4(id: number): Promise<void> {
         let url_ = this.baseUrl + "/Movie/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -349,19 +376,22 @@ export class Client {
             }
         };
 
-        const _response = await this.http.fetch(url_, options_);
-        return await this.processMovie5(_response);
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processMovie4(_response);
+        });
     }
 
-    protected async processMovie5(response: Response): Promise<void> {
+    protected processMovie4(response: Response): Promise<void> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
-            const _responseText = await response.text();
+            return response.text().then((_responseText) => {
             return;
+            });
         } else if (status !== 200 && status !== 204) {
-            const _responseText_1 = await response.text();
-            return throwException("An unexpected server error occurred.", status, _responseText_1, _headers);
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
         }
         return Promise.resolve<void>(<any>null);
     }
@@ -370,7 +400,7 @@ export class Client {
      * @param page (optional) 
      * @return Success
      */
-    async publisher(page: number | undefined): Promise<PaginationPublisher> {
+    publisher(page: number | undefined): Promise<PaginationPublisher> {
         let url_ = this.baseUrl + "/Publisher?";
         if (page === null)
             throw new Error("The parameter 'page' cannot be null.");
@@ -385,22 +415,25 @@ export class Client {
             }
         };
 
-        const _response = await this.http.fetch(url_, options_);
-        return await this.processPublisher(_response);
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processPublisher(_response);
+        });
     }
 
-    protected async processPublisher(response: Response): Promise<PaginationPublisher> {
+    protected processPublisher(response: Response): Promise<PaginationPublisher> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
-            const _responseText = await response.text();
+            return response.text().then((_responseText) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             result200 = PaginationPublisher.fromJS(resultData200);
             return result200;
+            });
         } else if (status !== 200 && status !== 204) {
-            const _responseText_1 = await response.text();
-            return throwException("An unexpected server error occurred.", status, _responseText_1, _headers);
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
         }
         return Promise.resolve<PaginationPublisher>(<any>null);
     }
@@ -409,7 +442,7 @@ export class Client {
      * @param body (optional) 
      * @return Success
      */
-    async publisher2(body: CreatePublishers | undefined): Promise<void> {
+    publisher2(body: CreatePublishers | undefined): Promise<void> {
         let url_ = this.baseUrl + "/Publisher";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -423,19 +456,22 @@ export class Client {
             }
         };
 
-        const _response = await this.http.fetch(url_, options_);
-        return await this.processPublisher2(_response);
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processPublisher2(_response);
+        });
     }
 
-    protected async processPublisher2(response: Response): Promise<void> {
+    protected processPublisher2(response: Response): Promise<void> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
-            const _responseText = await response.text();
+            return response.text().then((_responseText) => {
             return;
+            });
         } else if (status !== 200 && status !== 204) {
-            const _responseText_1 = await response.text();
-            return throwException("An unexpected server error occurred.", status, _responseText_1, _headers);
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
         }
         return Promise.resolve<void>(<any>null);
     }
@@ -443,7 +479,7 @@ export class Client {
     /**
      * @return Success
      */
-    async publisher3(id: number): Promise<Publishers> {
+    publisher3(id: number): Promise<Publishers> {
         let url_ = this.baseUrl + "/Publisher/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -457,22 +493,25 @@ export class Client {
             }
         };
 
-        const _response = await this.http.fetch(url_, options_);
-        return await this.processPublisher3(_response);
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processPublisher3(_response);
+        });
     }
 
-    protected async processPublisher3(response: Response): Promise<Publishers> {
+    protected processPublisher3(response: Response): Promise<Publishers> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
-            const _responseText = await response.text();
+            return response.text().then((_responseText) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             result200 = Publishers.fromJS(resultData200);
             return result200;
+            });
         } else if (status !== 200 && status !== 204) {
-            const _responseText_1 = await response.text();
-            return throwException("An unexpected server error occurred.", status, _responseText_1, _headers);
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
         }
         return Promise.resolve<Publishers>(<any>null);
     }
@@ -481,7 +520,7 @@ export class Client {
      * @param body (optional) 
      * @return Success
      */
-    async publisher4(id: number, body: CreatePublishers | undefined): Promise<void> {
+    publisher4(id: number, body: CreatePublishers | undefined): Promise<void> {
         let url_ = this.baseUrl + "/Publisher/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -498,19 +537,22 @@ export class Client {
             }
         };
 
-        const _response = await this.http.fetch(url_, options_);
-        return await this.processPublisher4(_response);
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processPublisher4(_response);
+        });
     }
 
-    protected async processPublisher4(response: Response): Promise<void> {
+    protected processPublisher4(response: Response): Promise<void> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
-            const _responseText = await response.text();
+            return response.text().then((_responseText) => {
             return;
+            });
         } else if (status !== 200 && status !== 204) {
-            const _responseText_1 = await response.text();
-            return throwException("An unexpected server error occurred.", status, _responseText_1, _headers);
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
         }
         return Promise.resolve<void>(<any>null);
     }
@@ -518,7 +560,7 @@ export class Client {
     /**
      * @return Success
      */
-    async publisher5(id: number): Promise<void> {
+    publisher5(id: number): Promise<void> {
         let url_ = this.baseUrl + "/Publisher/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -531,61 +573,71 @@ export class Client {
             }
         };
 
-        const _response = await this.http.fetch(url_, options_);
-        return await this.processPublisher5(_response);
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processPublisher5(_response);
+        });
     }
 
-    protected async processPublisher5(response: Response): Promise<void> {
+    protected processPublisher5(response: Response): Promise<void> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
-            const _responseText = await response.text();
+            return response.text().then((_responseText) => {
             return;
+            });
         } else if (status !== 200 && status !== 204) {
-            const _responseText_1 = await response.text();
-            return throwException("An unexpected server error occurred.", status, _responseText_1, _headers);
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
         }
         return Promise.resolve<void>(<any>null);
     }
 
-
-    async utilisateur(): Promise<Utilisateur> {
+    /**
+     * @param authorization (optional) 
+     * @return Success
+     */
+    utilisateur(authorization: string | undefined): Promise<Utilisateur> {
         let url_ = this.baseUrl + "/Utilisateur";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = <RequestInit>{
             method: "GET",
             headers: {
-                "Authorization": "Bearer " + localStorage.getItem("token"),
+                "Authorization": authorization !== undefined && authorization !== null ? "" + authorization : "",
                 "Accept": "text/plain"
             }
         };
 
-        const _response = await this.http.fetch(url_, options_);
-        return await this.processUtilisateur(_response);
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processUtilisateur(_response);
+        });
     }
 
-    protected async processUtilisateur(response: Response): Promise<Utilisateur> {
+    protected processUtilisateur(response: Response): Promise<Utilisateur> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
-            const _responseText = await response.text();
+            return response.text().then((_responseText) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             result200 = Utilisateur.fromJS(resultData200);
             return result200;
+            });
         } else if (status !== 200 && status !== 204) {
-            const _responseText_1 = await response.text();
-            return throwException("An unexpected server error occurred.", status, _responseText_1, _headers);
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
         }
         return Promise.resolve<Utilisateur>(<any>null);
     }
 
     /**
+     * @param authorization (optional) 
      * @param body (optional) 
      * @return Success
      */
-    async utilisateurUpdate(body: Utilisateur | undefined): Promise<void> {
+    utilisateur2(authorization: string | undefined, body: Utilisateur | undefined): Promise<void> {
         let url_ = this.baseUrl + "/Utilisateur";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -595,24 +647,27 @@ export class Client {
             body: content_,
             method: "PUT",
             headers: {
-                "Authorization": "Bearer " + localStorage.getItem("token"),
+                "Authorization": authorization !== undefined && authorization !== null ? "" + authorization : "",
                 "Content-Type": "application/json",
             }
         };
 
-        const _response = await this.http.fetch(url_, options_);
-        return await this.processUtilisateur2(_response);
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processUtilisateur2(_response);
+        });
     }
 
-    protected async processUtilisateur2(response: Response): Promise<void> {
+    protected processUtilisateur2(response: Response): Promise<void> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
-            const _responseText = await response.text();
+            return response.text().then((_responseText) => {
             return;
+            });
         } else if (status !== 200 && status !== 204) {
-            const _responseText_1 = await response.text();
-            return throwException("An unexpected server error occurred.", status, _responseText_1, _headers);
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
         }
         return Promise.resolve<void>(<any>null);
     }
@@ -621,30 +676,33 @@ export class Client {
      * @param authorization (optional) 
      * @return Success
      */
-    async utilisateurDelete(): Promise<void> {
+    utilisateur3(authorization: string | undefined): Promise<void> {
         let url_ = this.baseUrl + "/Utilisateur";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = <RequestInit>{
             method: "DELETE",
             headers: {
-                "Authorization": "Bearer " + localStorage.getItem("token"),
+                "Authorization": authorization !== undefined && authorization !== null ? "" + authorization : "",
             }
         };
 
-        const _response = await this.http.fetch(url_, options_);
-        return await this.processUtilisateur3(_response);
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processUtilisateur3(_response);
+        });
     }
 
-    protected async processUtilisateur3(response: Response): Promise<void> {
+    protected processUtilisateur3(response: Response): Promise<void> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
-            const _responseText = await response.text();
+            return response.text().then((_responseText) => {
             return;
+            });
         } else if (status !== 200 && status !== 204) {
-            const _responseText_1 = await response.text();
-            return throwException("An unexpected server error occurred.", status, _responseText_1, _headers);
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
         }
         return Promise.resolve<void>(<any>null);
     }
@@ -653,7 +711,7 @@ export class Client {
      * @param authorization (optional) 
      * @return Success
      */
-    async notificationsAll(authorization: string | undefined): Promise<Notifications[]> {
+    notificationsAll(authorization: string | undefined): Promise<Notifications[]> {
         let url_ = this.baseUrl + "/Utilisateur/notifications";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -665,15 +723,16 @@ export class Client {
             }
         };
 
-        const _response = await this.http.fetch(url_, options_);
-        return await this.processNotificationsAll(_response);
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processNotificationsAll(_response);
+        });
     }
 
-    protected async processNotificationsAll(response: Response): Promise<Notifications[]> {
+    protected processNotificationsAll(response: Response): Promise<Notifications[]> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
-            const _responseText = await response.text();
+            return response.text().then((_responseText) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             if (Array.isArray(resultData200)) {
@@ -682,9 +741,11 @@ export class Client {
                     result200!.push(Notifications.fromJS(item));
             }
             return result200;
+            });
         } else if (status !== 200 && status !== 204) {
-            const _responseText_1 = await response.text();
-            return throwException("An unexpected server error occurred.", status, _responseText_1, _headers);
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
         }
         return Promise.resolve<Notifications[]>(<any>null);
     }
@@ -693,7 +754,7 @@ export class Client {
      * @param authorization (optional) 
      * @return Success
      */
-    async notificationsDelete(id: number, authorization: string | undefined): Promise<void> {
+    notifications(id: number, authorization: string | undefined): Promise<void> {
         let url_ = this.baseUrl + "/Utilisateur/notifications/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -707,19 +768,22 @@ export class Client {
             }
         };
 
-        const _response = await this.http.fetch(url_, options_);
-        return await this.processNotifications(_response);
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processNotifications(_response);
+        });
     }
 
-    protected async processNotifications(response: Response): Promise<void> {
+    protected processNotifications(response: Response): Promise<void> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
-            const _responseText = await response.text();
+            return response.text().then((_responseText) => {
             return;
+            });
         } else if (status !== 200 && status !== 204) {
-            const _responseText_1 = await response.text();
-            return throwException("An unexpected server error occurred.", status, _responseText_1, _headers);
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
         }
         return Promise.resolve<void>(<any>null);
     }
@@ -727,7 +791,7 @@ export class Client {
     /**
      * @return Success
      */
-    async likeAll(): Promise<Utilisateur_Publisher[]> {
+    likeAll(): Promise<Utilisateur_Publisher[]> {
         let url_ = this.baseUrl + "/Utilisateur/like";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -738,15 +802,16 @@ export class Client {
             }
         };
 
-        const _response = await this.http.fetch(url_, options_);
-        return await this.processLikeAll(_response);
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processLikeAll(_response);
+        });
     }
 
-    protected async processLikeAll(response: Response): Promise<Utilisateur_Publisher[]> {
+    protected processLikeAll(response: Response): Promise<Utilisateur_Publisher[]> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
-            const _responseText = await response.text();
+            return response.text().then((_responseText) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             if (Array.isArray(resultData200)) {
@@ -755,9 +820,11 @@ export class Client {
                     result200!.push(Utilisateur_Publisher.fromJS(item));
             }
             return result200;
+            });
         } else if (status !== 200 && status !== 204) {
-            const _responseText_1 = await response.text();
-            return throwException("An unexpected server error occurred.", status, _responseText_1, _headers);
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
         }
         return Promise.resolve<Utilisateur_Publisher[]>(<any>null);
     }
@@ -767,7 +834,7 @@ export class Client {
      * @param body (optional) 
      * @return Success
      */
-    async like(authorization: string | undefined, body: CreateUtilisateur_Publisher | undefined): Promise<number> {
+    like(authorization: string | undefined, body: CreateUtilisateur_Publisher | undefined): Promise<number> {
         let url_ = this.baseUrl + "/Utilisateur/like";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -783,22 +850,25 @@ export class Client {
             }
         };
 
-        const _response = await this.http.fetch(url_, options_);
-        return await this.processLike(_response);
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processLike(_response);
+        });
     }
 
-    protected async processLike(response: Response): Promise<number> {
+    protected processLike(response: Response): Promise<number> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
-            const _responseText = await response.text();
+            return response.text().then((_responseText) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             result200 = resultData200 !== undefined ? resultData200 : <any>null;
             return result200;
+            });
         } else if (status !== 200 && status !== 204) {
-            const _responseText_1 = await response.text();
-            return throwException("An unexpected server error occurred.", status, _responseText_1, _headers);
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
         }
         return Promise.resolve<number>(<any>null);
     }
@@ -806,7 +876,7 @@ export class Client {
     /**
      * @return Success
      */
-    async dislike(id: number): Promise<void> {
+    like2(id: number): Promise<void> {
         let url_ = this.baseUrl + "/Utilisateur/like/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -819,19 +889,22 @@ export class Client {
             }
         };
 
-        const _response = await this.http.fetch(url_, options_);
-        return await this.processLike2(_response);
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processLike2(_response);
+        });
     }
 
-    protected async processLike2(response: Response): Promise<void> {
+    protected processLike2(response: Response): Promise<void> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
-            const _responseText = await response.text();
+            return response.text().then((_responseText) => {
             return;
+            });
         } else if (status !== 200 && status !== 204) {
-            const _responseText_1 = await response.text();
-            return throwException("An unexpected server error occurred.", status, _responseText_1, _headers);
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
         }
         return Promise.resolve<void>(<any>null);
     }
@@ -1299,54 +1372,6 @@ export class Pages implements IPages {
 export interface IPages {
     nb_Pages?: number;
     nb_Items?: number;
-}
-
-export class PaginationMovie implements IPaginationMovie {
-    pages?: Pages;
-    movies?: Movies[] | undefined;
-
-    constructor(data?: IPaginationMovie) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.pages = _data["pages"] ? Pages.fromJS(_data["pages"]) : <any>undefined;
-            if (Array.isArray(_data["movies"])) {
-                this.movies = [] as any;
-                for (let item of _data["movies"])
-                    this.movies!.push(Movies.fromJS(item));
-            }
-        }
-    }
-
-    static fromJS(data: any): PaginationMovie {
-        data = typeof data === 'object' ? data : {};
-        let result = new PaginationMovie();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["pages"] = this.pages ? this.pages.toJSON() : <any>undefined;
-        if (Array.isArray(this.movies)) {
-            data["movies"] = [];
-            for (let item of this.movies)
-                data["movies"].push(item.toJSON());
-        }
-        return data; 
-    }
-}
-
-export interface IPaginationMovie {
-    pages?: Pages;
-    movies?: Movies[] | undefined;
 }
 
 export class PaginationPublisher implements IPaginationPublisher {

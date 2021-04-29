@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Movies, PaginationMovie } from 'src/app/classes/client';
+import { Movies } from 'src/app/classes/client';
 import { MoviesService } from 'src/app/services/movies.service';
 
 @Component({
@@ -15,7 +15,7 @@ export class MoviesComponent implements OnInit {
   constructor(private moviesService : MoviesService) { }
 
   async ngOnInit(): Promise<void> {
-    this.movies$ = (await this.moviesService.getPage(0)).toJSON;
+    this.movies$ = this.moviesService.getPage(0);
   }
 
 }
