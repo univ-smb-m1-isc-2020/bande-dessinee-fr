@@ -10,7 +10,6 @@ namespace backend
 {
     [Route("[controller]")]
     [ApiController]
-    [Authorize]
     public class MovieController : ControllerBase
     {
         private readonly MoviesRepository movieRepository;

@@ -10,7 +10,6 @@ namespace backend.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    [Authorize]
     public class PublisherController : ControllerBase
     {
         private readonly PublishersRepository publishersRepository;

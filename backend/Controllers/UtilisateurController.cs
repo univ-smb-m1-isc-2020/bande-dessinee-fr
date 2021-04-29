@@ -15,7 +15,6 @@ namespace backend.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    [Authorize]
     public class UtilisateurController : ControllerBase
     {
         private readonly UtilisateurRepository utilisateurRepository;
