@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  server:"http://localhost:8080/api"
+  server:"https://bande-dessinee-fr.oups.net/api"
 };
 
 /*
