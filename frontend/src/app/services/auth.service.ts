@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 import { AuthenticateUtilisateur, Client, CreateUtilisateur} from '../classes/client';
 
 @Injectable({
@@ -7,7 +8,7 @@ import { AuthenticateUtilisateur, Client, CreateUtilisateur} from '../classes/cl
 })
 export class AuthService {
 
-  client = new Client("http://localhost:8080/api");
+  client = new Client(environment.server);
   constructor(private router:Router) { }
 
   async login(email, password) {
