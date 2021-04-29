@@ -11,11 +11,11 @@ import { MoviesService } from 'src/app/services/movies.service';
 export class MoviesComponent implements OnInit {
 
 
-  movies$: Movies[];
+  movies$: any;
   constructor(private moviesService : MoviesService) { }
 
   async ngOnInit(): Promise<void> {
-    (await this.moviesService.getPage(0)).movies.forEach(o=> console.log(o.name));
+    this.movies$ = (await this.moviesService.getPage(0)).toJSON;
   }
 
 }
