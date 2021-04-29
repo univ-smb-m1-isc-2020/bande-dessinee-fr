@@ -3,6 +3,8 @@ using backend.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -29,14 +31,9 @@ namespace backend
 
         // GET: api/<MovieController>
         [HttpGet]
-        public PaginationMovie Get([FromQuery] int page)
+        public IEnumerable<Movies> Get([FromQuery] int page)
         {
-            var res = new PaginationMovie
-            {
-                Pages = movieRepository.GetPages(),
-                Movies = movieRepository.GetPage(page)
-            };
-            return res;
+            return movieRepository.GetPage(page);
         }
 
         // GET api/<MovieController>/5
