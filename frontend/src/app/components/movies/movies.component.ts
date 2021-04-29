@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Movies } from 'src/app/classes/client';
 import { MoviesService } from 'src/app/services/movies.service';
 
@@ -12,12 +13,16 @@ export class MoviesComponent implements OnInit {
 
 
   movies$: Promise<Movies[]>;
-  constructor(private moviesService : MoviesService) { }
+  constructor(private moviesService : MoviesService, private router:Router) { }
 
   async ngOnInit(){
     this.movies$ = this.moviesService.getPage(0);
     console.log("HEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEY");
     console.log((await this.movies$).toString);
+  }
+
+  goToMovie(id){
+    this.router.navigate(["/movies",id]);
   }
 
 }
