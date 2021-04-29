@@ -42,7 +42,7 @@ const routes: Routes = [
     path: 'admin/settings',
     component: SettingsComponent,
   },
-  { path: '**', component: PageNotFoundComponent },  // Wildcard route for a 404 page
+  //{ path: '**', component: PageNotFoundComponent },  // Wildcard route for a 404 page
 ];
 
 @NgModule({
