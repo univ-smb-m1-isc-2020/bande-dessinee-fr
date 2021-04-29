@@ -23,7 +23,7 @@ const routes: Routes = [
   { path: 'signup', component: SignuppageComponent },
   { path: 'publishers', component: PublishersComponent },
   { path: 'notifications', component: NotificationsComponent },
-  { path: 'movies/:id', component: MoviesComponent },
+  { path: 'movies', component: MoviesComponent },
   { path: 'movie/:id', component: MovieComponent },
   
   {
