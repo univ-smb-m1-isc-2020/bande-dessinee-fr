@@ -30,7 +30,7 @@ export class SignuppageComponent implements OnInit {
 
   ngOnInit(): void {
     if (localStorage.getItem("token") && localStorage.getItem("refreshToken")) {
-      this.router.navigate(["movies"]);
+      this.router.navigate(["movies","0"]);
     }
   }
 
