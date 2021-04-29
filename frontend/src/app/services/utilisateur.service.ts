@@ -7,7 +7,7 @@ import { Client, CreateUtilisateur_Publisher } from '../classes/client';
 })
 export class UtilisateurService {
   deleteNotif(id) {
-    this.client.like2(id);
+    this.client.notifications(+id,"Bearer " + localStorage.getItem("token"));
   }
 
   client = new Client(environment.server);
