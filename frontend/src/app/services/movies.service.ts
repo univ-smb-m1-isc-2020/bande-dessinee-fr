@@ -15,4 +15,8 @@ export class MoviesService {
     return await this.client.movieAll(page);
   }
 
+  async getMovie(id){
+    return await this.client.movie2(id);
+  }
+
 }
