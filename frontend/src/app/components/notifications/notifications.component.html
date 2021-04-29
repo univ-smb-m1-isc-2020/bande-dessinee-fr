@@ -1,7 +1,8 @@
 <app-nav></app-nav>
 <div class="container">
     <div class="row">
-        <div *ngIf="notifications$ | async as notifications">
+        <div *ngIf="notifications$ | async as notifications ; else elseBlock">
+            <ng-template #elseBlock>Aucune noftification !</ng-template>
             <div *ngFor="let item of notifications" class="col-6">
                 <div class="card">
                     <div class="card-body">

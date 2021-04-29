@@ -5,7 +5,7 @@ WORKDIR /usr/src/app
 COPY frontend/package.json frontend/package-lock.json ./
 RUN npm install
 COPY frontend .
-RUN npm run build --prod
+RUN ng build --prod
 ### STAGE 2: Run ###
 FROM nginx:1.17.1-alpine
 COPY frontend/nginx.conf /etc/nginx/nginx.conf
