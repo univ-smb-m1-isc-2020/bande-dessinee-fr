@@ -6,6 +6,9 @@ import { Client, CreateUtilisateur_Publisher } from '../classes/client';
   providedIn: 'root'
 })
 export class UtilisateurService {
+  deleteNotif(id) {
+    this.client.like2(id);
+  }
 
   client = new Client(environment.server);
   constructor() { }

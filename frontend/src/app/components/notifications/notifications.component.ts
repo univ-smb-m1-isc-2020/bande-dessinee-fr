@@ -20,6 +20,7 @@ export class NotificationsComponent implements OnInit {
   }
   goToMovie(id){
     this.router.navigate(["movies",+id]);
+    this.utilisateurService.deleteNotif(+id);
   }
 
 }
