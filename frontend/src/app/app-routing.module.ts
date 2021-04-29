@@ -24,7 +24,7 @@ const routes: Routes = [
   { path: 'publishers', component: PublishersComponent },
   { path: 'notifications', component: NotificationsComponent },
   { path: 'movies', component: MoviesComponent },
-  { path: 'movie/:id', component: MovieComponent },
+  { path: 'movie', component: MovieComponent },
   
   {
     path: 'admin',

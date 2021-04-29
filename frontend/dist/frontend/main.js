@@ -145,7 +145,7 @@ NavComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCompo
 /*!***********************************!*\
   !*** ./src/app/classes/client.ts ***!
   \***********************************/
-/*! exports provided: Client, AuthenticateUtilisateur, AuthenticationResponse, CreateMovies, CreateMoviesAndPublisher, CreatePublishers, CreateUtilisateur, CreateUtilisateur_Publisher, Movies, Notifications, Pages, PaginationMovie, PaginationPublisher, Publishers, RefreshUtilisateur, Utilisateur, Utilisateur_Publisher, ApiException */
+/*! exports provided: Client, AuthenticateUtilisateur, AuthenticationResponse, CreateMovies, CreateMoviesAndPublisher, CreatePublishers, CreateUtilisateur, CreateUtilisateur_Publisher, Movies, Notifications, Pages, PaginationPublisher, Publishers, RefreshUtilisateur, Utilisateur, Utilisateur_Publisher, ApiException */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -161,14 +161,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Movies", function() { return Movies; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Notifications", function() { return Notifications; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Pages", function() { return Pages; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PaginationMovie", function() { return PaginationMovie; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PaginationPublisher", function() { return PaginationPublisher; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Publishers", function() { return Publishers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RefreshUtilisateur", function() { return RefreshUtilisateur; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Utilisateur", function() { return Utilisateur; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Utilisateur_Publisher", function() { return Utilisateur_Publisher; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ApiException", function() { return ApiException; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
 /* tslint:disable */
 /* eslint-disable */
 //----------------------
@@ -177,7 +175,6 @@ __webpack_require__.r(__webpack_exports__);
 // </auto-generated>
 //----------------------
 // ReSharper disable InconsistentNaming
-
 class Client {
     constructor(baseUrl, http) {
         this.jsonParseReviver = undefined;
@@ -191,734 +188,723 @@ class Client {
      * @return Success
      */
     admin(password, database, offset) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            let url_ = this.baseUrl + "/Admin?";
-            if (password === null)
-                throw new Error("The parameter 'password' cannot be null.");
-            else if (password !== undefined)
-                url_ += "password=" + encodeURIComponent("" + password) + "&";
-            if (database === null)
-                throw new Error("The parameter 'database' cannot be null.");
-            else if (database !== undefined)
-                url_ += "database=" + encodeURIComponent("" + database) + "&";
-            if (offset === null)
-                throw new Error("The parameter 'offset' cannot be null.");
-            else if (offset !== undefined)
-                url_ += "offset=" + encodeURIComponent("" + offset) + "&";
-            url_ = url_.replace(/[?&]$/, "");
-            let options_ = {
-                method: "GET",
-                headers: {
-                    "Accept": "text/plain"
-                }
-            };
-            const _response = yield this.http.fetch(url_, options_);
-            return yield this.processAdmin(_response);
+        let url_ = this.baseUrl + "/Admin?";
+        if (password === null)
+            throw new Error("The parameter 'password' cannot be null.");
+        else if (password !== undefined)
+            url_ += "password=" + encodeURIComponent("" + password) + "&";
+        if (database === null)
+            throw new Error("The parameter 'database' cannot be null.");
+        else if (database !== undefined)
+            url_ += "database=" + encodeURIComponent("" + database) + "&";
+        if (offset === null)
+            throw new Error("The parameter 'offset' cannot be null.");
+        else if (offset !== undefined)
+            url_ += "offset=" + encodeURIComponent("" + offset) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+        let options_ = {
+            method: "GET",
+            headers: {
+                "Accept": "text/plain"
+            }
+        };
+        return this.http.fetch(url_, options_).then((_response) => {
+            return this.processAdmin(_response);
         });
     }
     processAdmin(response) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            const status = response.status;
-            let _headers = {};
-            if (response.headers && response.headers.forEach) {
-                response.headers.forEach((v, k) => _headers[k] = v);
-            }
-            ;
-            if (status === 200) {
-                const _responseText = yield response.text();
+        const status = response.status;
+        let _headers = {};
+        if (response.headers && response.headers.forEach) {
+            response.headers.forEach((v, k) => _headers[k] = v);
+        }
+        ;
+        if (status === 200) {
+            return response.text().then((_responseText) => {
                 let result200 = null;
                 let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
                 result200 = resultData200 !== undefined ? resultData200 : null;
                 return result200;
-            }
-            else if (status !== 200 && status !== 204) {
-                const _responseText_1 = yield response.text();
-                return throwException("An unexpected server error occurred.", status, _responseText_1, _headers);
-            }
-            return Promise.resolve(null);
-        });
+            });
+        }
+        else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+                return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve(null);
     }
     /**
      * @param body (optional)
      * @return Success
      */
     login(body) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            let url_ = this.baseUrl + "/Auth/login";
-            url_ = url_.replace(/[?&]$/, "");
-            const content_ = JSON.stringify(body);
-            let options_ = {
-                body: content_,
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "text/plain"
-                }
-            };
-            const _response = yield this.http.fetch(url_, options_);
-            return yield this.processLogin(_response);
+        let url_ = this.baseUrl + "/Auth/login";
+        url_ = url_.replace(/[?&]$/, "");
+        const content_ = JSON.stringify(body);
+        let options_ = {
+            body: content_,
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "text/plain"
+            }
+        };
+        return this.http.fetch(url_, options_).then((_response) => {
+            return this.processLogin(_response);
         });
     }
     processLogin(response) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            const status = response.status;
-            let _headers = {};
-            if (response.headers && response.headers.forEach) {
-                response.headers.forEach((v, k) => _headers[k] = v);
-            }
-            ;
-            if (status === 200) {
-                const _responseText = yield response.text();
+        const status = response.status;
+        let _headers = {};
+        if (response.headers && response.headers.forEach) {
+            response.headers.forEach((v, k) => _headers[k] = v);
+        }
+        ;
+        if (status === 200) {
+            return response.text().then((_responseText) => {
                 let result200 = null;
                 let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
                 result200 = AuthenticationResponse.fromJS(resultData200);
                 return result200;
-            }
-            else if (status !== 200 && status !== 204) {
-                const _responseText_1 = yield response.text();
-                return throwException("An unexpected server error occurred.", status, _responseText_1, _headers);
-            }
-            return Promise.resolve(null);
-        });
+            });
+        }
+        else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+                return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve(null);
     }
     /**
      * @param body (optional)
      * @return Success
      */
     register(body) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            let url_ = this.baseUrl + "/Auth/register";
-            url_ = url_.replace(/[?&]$/, "");
-            const content_ = JSON.stringify(body);
-            let options_ = {
-                body: content_,
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "text/plain"
-                }
-            };
-            const _response = yield this.http.fetch(url_, options_);
-            return yield this.processRegister(_response);
+        let url_ = this.baseUrl + "/Auth/register";
+        url_ = url_.replace(/[?&]$/, "");
+        const content_ = JSON.stringify(body);
+        let options_ = {
+            body: content_,
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "text/plain"
+            }
+        };
+        return this.http.fetch(url_, options_).then((_response) => {
+            return this.processRegister(_response);
         });
     }
     processRegister(response) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            const status = response.status;
-            let _headers = {};
-            if (response.headers && response.headers.forEach) {
-                response.headers.forEach((v, k) => _headers[k] = v);
-            }
-            ;
-            if (status === 200) {
-                const _responseText = yield response.text();
+        const status = response.status;
+        let _headers = {};
+        if (response.headers && response.headers.forEach) {
+            response.headers.forEach((v, k) => _headers[k] = v);
+        }
+        ;
+        if (status === 200) {
+            return response.text().then((_responseText) => {
                 let result200 = null;
                 let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
                 result200 = AuthenticationResponse.fromJS(resultData200);
                 return result200;
-            }
-            else if (status !== 200 && status !== 204) {
-                const _responseText_1 = yield response.text();
-                return throwException("An unexpected server error occurred.", status, _responseText_1, _headers);
-            }
-            return Promise.resolve(null);
-        });
+            });
+        }
+        else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+                return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve(null);
     }
     /**
      * @param body (optional)
      * @return Success
      */
     refresh(body) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            let url_ = this.baseUrl + "/Auth/refresh";
-            url_ = url_.replace(/[?&]$/, "");
-            const content_ = JSON.stringify(body);
-            let options_ = {
-                body: content_,
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "text/plain"
-                }
-            };
-            const _response = yield this.http.fetch(url_, options_);
-            return yield this.processRefresh(_response);
+        let url_ = this.baseUrl + "/Auth/refresh";
+        url_ = url_.replace(/[?&]$/, "");
+        const content_ = JSON.stringify(body);
+        let options_ = {
+            body: content_,
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "text/plain"
+            }
+        };
+        return this.http.fetch(url_, options_).then((_response) => {
+            return this.processRefresh(_response);
         });
     }
     processRefresh(response) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            const status = response.status;
-            let _headers = {};
-            if (response.headers && response.headers.forEach) {
-                response.headers.forEach((v, k) => _headers[k] = v);
-            }
-            ;
-            if (status === 200) {
-                const _responseText = yield response.text();
+        const status = response.status;
+        let _headers = {};
+        if (response.headers && response.headers.forEach) {
+            response.headers.forEach((v, k) => _headers[k] = v);
+        }
+        ;
+        if (status === 200) {
+            return response.text().then((_responseText) => {
                 let result200 = null;
                 let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
                 result200 = AuthenticationResponse.fromJS(resultData200);
                 return result200;
-            }
-            else if (status !== 200 && status !== 204) {
-                const _responseText_1 = yield response.text();
-                return throwException("An unexpected server error occurred.", status, _responseText_1, _headers);
-            }
-            return Promise.resolve(null);
-        });
+            });
+        }
+        else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+                return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve(null);
     }
     /**
      * @param page (optional)
      * @return Success
      */
-    movieGetPage(page) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            let url_ = this.baseUrl + "/Movie?";
-            if (page === null)
-                throw new Error("The parameter 'page' cannot be null.");
-            else if (page !== undefined)
-                url_ += "page=" + encodeURIComponent("" + page) + "&";
-            url_ = url_.replace(/[?&]$/, "");
-            let options_ = {
-                method: "GET",
-                headers: {
-                    "Authorization": "Bearer" + localStorage.getItem("token"),
-                    "Accept": "text/plain"
-                }
-            };
-            const _response = yield this.http.fetch(url_, options_);
-            return yield this.processMovie(_response);
+    movieAll(page) {
+        let url_ = this.baseUrl + "/Movie?";
+        if (page === null)
+            throw new Error("The parameter 'page' cannot be null.");
+        else if (page !== undefined)
+            url_ += "page=" + encodeURIComponent("" + page) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+        let options_ = {
+            method: "GET",
+            headers: {
+                "Accept": "text/plain"
+            }
+        };
+        return this.http.fetch(url_, options_).then((_response) => {
+            return this.processMovieAll(_response);
         });
     }
-    processMovie(response) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            const status = response.status;
-            let _headers = {};
-            if (response.headers && response.headers.forEach) {
-                response.headers.forEach((v, k) => _headers[k] = v);
-            }
-            ;
-            if (status === 200) {
-                const _responseText = yield response.text();
+    processMovieAll(response) {
+        const status = response.status;
+        let _headers = {};
+        if (response.headers && response.headers.forEach) {
+            response.headers.forEach((v, k) => _headers[k] = v);
+        }
+        ;
+        if (status === 200) {
+            return response.text().then((_responseText) => {
                 let result200 = null;
                 let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                result200 = PaginationMovie.fromJS(resultData200);
+                if (Array.isArray(resultData200)) {
+                    result200 = [];
+                    for (let item of resultData200)
+                        result200.push(Movies.fromJS(item));
+                }
                 return result200;
-            }
-            else if (status !== 200 && status !== 204) {
-                const _responseText_1 = yield response.text();
-                return throwException("An unexpected server error occurred.", status, _responseText_1, _headers);
-            }
-            return Promise.resolve(null);
-        });
+            });
+        }
+        else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+                return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve(null);
     }
     /**
      * @param body (optional)
      * @return Success
      */
-    movieCreate(body) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            let url_ = this.baseUrl + "/Movie";
-            url_ = url_.replace(/[?&]$/, "");
-            const content_ = JSON.stringify(body);
-            let options_ = {
-                body: content_,
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                }
-            };
-            const _response = yield this.http.fetch(url_, options_);
-            return yield this.processMovie2(_response);
+    movie(body) {
+        let url_ = this.baseUrl + "/Movie";
+        url_ = url_.replace(/[?&]$/, "");
+        const content_ = JSON.stringify(body);
+        let options_ = {
+            body: content_,
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        };
+        return this.http.fetch(url_, options_).then((_response) => {
+            return this.processMovie(_response);
         });
     }
-    processMovie2(response) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            const status = response.status;
-            let _headers = {};
-            if (response.headers && response.headers.forEach) {
-                response.headers.forEach((v, k) => _headers[k] = v);
-            }
-            ;
-            if (status === 200) {
-                const _responseText = yield response.text();
+    processMovie(response) {
+        const status = response.status;
+        let _headers = {};
+        if (response.headers && response.headers.forEach) {
+            response.headers.forEach((v, k) => _headers[k] = v);
+        }
+        ;
+        if (status === 200) {
+            return response.text().then((_responseText) => {
                 return;
-            }
-            else if (status !== 200 && status !== 204) {
-                const _responseText_1 = yield response.text();
-                return throwException("An unexpected server error occurred.", status, _responseText_1, _headers);
-            }
-            return Promise.resolve(null);
-        });
+            });
+        }
+        else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+                return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve(null);
     }
     /**
      * @return Success
      */
-    movieGetById(id) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            let url_ = this.baseUrl + "/Movie/{id}";
-            if (id === undefined || id === null)
-                throw new Error("The parameter 'id' must be defined.");
-            url_ = url_.replace("{id}", encodeURIComponent("" + id));
-            url_ = url_.replace(/[?&]$/, "");
-            let options_ = {
-                method: "GET",
-                headers: {
-                    "Accept": "text/plain"
-                }
-            };
-            const _response = yield this.http.fetch(url_, options_);
-            return yield this.processMovie3(_response);
+    movie2(id) {
+        let url_ = this.baseUrl + "/Movie/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        url_ = url_.replace(/[?&]$/, "");
+        let options_ = {
+            method: "GET",
+            headers: {
+                "Accept": "text/plain"
+            }
+        };
+        return this.http.fetch(url_, options_).then((_response) => {
+            return this.processMovie2(_response);
         });
     }
-    processMovie3(response) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            const status = response.status;
-            let _headers = {};
-            if (response.headers && response.headers.forEach) {
-                response.headers.forEach((v, k) => _headers[k] = v);
-            }
-            ;
-            if (status === 200) {
-                const _responseText = yield response.text();
+    processMovie2(response) {
+        const status = response.status;
+        let _headers = {};
+        if (response.headers && response.headers.forEach) {
+            response.headers.forEach((v, k) => _headers[k] = v);
+        }
+        ;
+        if (status === 200) {
+            return response.text().then((_responseText) => {
                 let result200 = null;
                 let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
                 result200 = Movies.fromJS(resultData200);
                 return result200;
-            }
-            else if (status !== 200 && status !== 204) {
-                const _responseText_1 = yield response.text();
-                return throwException("An unexpected server error occurred.", status, _responseText_1, _headers);
-            }
-            return Promise.resolve(null);
-        });
+            });
+        }
+        else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+                return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve(null);
     }
     /**
      * @param body (optional)
      * @return Success
      */
-    movieUpdate(id, body) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            let url_ = this.baseUrl + "/Movie/{id}";
-            if (id === undefined || id === null)
-                throw new Error("The parameter 'id' must be defined.");
-            url_ = url_.replace("{id}", encodeURIComponent("" + id));
-            url_ = url_.replace(/[?&]$/, "");
-            const content_ = JSON.stringify(body);
-            let options_ = {
-                body: content_,
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                }
-            };
-            const _response = yield this.http.fetch(url_, options_);
-            return yield this.processMovie4(_response);
+    movie3(id, body) {
+        let url_ = this.baseUrl + "/Movie/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        url_ = url_.replace(/[?&]$/, "");
+        const content_ = JSON.stringify(body);
+        let options_ = {
+            body: content_,
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        };
+        return this.http.fetch(url_, options_).then((_response) => {
+            return this.processMovie3(_response);
         });
     }
-    processMovie4(response) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            const status = response.status;
-            let _headers = {};
-            if (response.headers && response.headers.forEach) {
-                response.headers.forEach((v, k) => _headers[k] = v);
-            }
-            ;
-            if (status === 200) {
-                const _responseText = yield response.text();
+    processMovie3(response) {
+        const status = response.status;
+        let _headers = {};
+        if (response.headers && response.headers.forEach) {
+            response.headers.forEach((v, k) => _headers[k] = v);
+        }
+        ;
+        if (status === 200) {
+            return response.text().then((_responseText) => {
                 return;
-            }
-            else if (status !== 200 && status !== 204) {
-                const _responseText_1 = yield response.text();
-                return throwException("An unexpected server error occurred.", status, _responseText_1, _headers);
-            }
-            return Promise.resolve(null);
-        });
+            });
+        }
+        else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+                return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve(null);
     }
     /**
      * @return Success
      */
-    movie5(id) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            let url_ = this.baseUrl + "/Movie/{id}";
-            if (id === undefined || id === null)
-                throw new Error("The parameter 'id' must be defined.");
-            url_ = url_.replace("{id}", encodeURIComponent("" + id));
-            url_ = url_.replace(/[?&]$/, "");
-            let options_ = {
-                method: "DELETE",
-                headers: {}
-            };
-            const _response = yield this.http.fetch(url_, options_);
-            return yield this.processMovie5(_response);
+    movie4(id) {
+        let url_ = this.baseUrl + "/Movie/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        url_ = url_.replace(/[?&]$/, "");
+        let options_ = {
+            method: "DELETE",
+            headers: {}
+        };
+        return this.http.fetch(url_, options_).then((_response) => {
+            return this.processMovie4(_response);
         });
     }
-    processMovie5(response) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            const status = response.status;
-            let _headers = {};
-            if (response.headers && response.headers.forEach) {
-                response.headers.forEach((v, k) => _headers[k] = v);
-            }
-            ;
-            if (status === 200) {
-                const _responseText = yield response.text();
+    processMovie4(response) {
+        const status = response.status;
+        let _headers = {};
+        if (response.headers && response.headers.forEach) {
+            response.headers.forEach((v, k) => _headers[k] = v);
+        }
+        ;
+        if (status === 200) {
+            return response.text().then((_responseText) => {
                 return;
-            }
-            else if (status !== 200 && status !== 204) {
-                const _responseText_1 = yield response.text();
-                return throwException("An unexpected server error occurred.", status, _responseText_1, _headers);
-            }
-            return Promise.resolve(null);
-        });
+            });
+        }
+        else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+                return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve(null);
     }
     /**
      * @param page (optional)
      * @return Success
      */
     publisher(page) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            let url_ = this.baseUrl + "/Publisher?";
-            if (page === null)
-                throw new Error("The parameter 'page' cannot be null.");
-            else if (page !== undefined)
-                url_ += "page=" + encodeURIComponent("" + page) + "&";
-            url_ = url_.replace(/[?&]$/, "");
-            let options_ = {
-                method: "GET",
-                headers: {
-                    "Accept": "text/plain"
-                }
-            };
-            const _response = yield this.http.fetch(url_, options_);
-            return yield this.processPublisher(_response);
+        let url_ = this.baseUrl + "/Publisher?";
+        if (page === null)
+            throw new Error("The parameter 'page' cannot be null.");
+        else if (page !== undefined)
+            url_ += "page=" + encodeURIComponent("" + page) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+        let options_ = {
+            method: "GET",
+            headers: {
+                "Accept": "text/plain"
+            }
+        };
+        return this.http.fetch(url_, options_).then((_response) => {
+            return this.processPublisher(_response);
         });
     }
     processPublisher(response) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            const status = response.status;
-            let _headers = {};
-            if (response.headers && response.headers.forEach) {
-                response.headers.forEach((v, k) => _headers[k] = v);
-            }
-            ;
-            if (status === 200) {
-                const _responseText = yield response.text();
+        const status = response.status;
+        let _headers = {};
+        if (response.headers && response.headers.forEach) {
+            response.headers.forEach((v, k) => _headers[k] = v);
+        }
+        ;
+        if (status === 200) {
+            return response.text().then((_responseText) => {
                 let result200 = null;
                 let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
                 result200 = PaginationPublisher.fromJS(resultData200);
                 return result200;
-            }
-            else if (status !== 200 && status !== 204) {
-                const _responseText_1 = yield response.text();
-                return throwException("An unexpected server error occurred.", status, _responseText_1, _headers);
-            }
-            return Promise.resolve(null);
-        });
+            });
+        }
+        else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+                return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve(null);
     }
     /**
      * @param body (optional)
      * @return Success
      */
     publisher2(body) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            let url_ = this.baseUrl + "/Publisher";
-            url_ = url_.replace(/[?&]$/, "");
-            const content_ = JSON.stringify(body);
-            let options_ = {
-                body: content_,
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                }
-            };
-            const _response = yield this.http.fetch(url_, options_);
-            return yield this.processPublisher2(_response);
+        let url_ = this.baseUrl + "/Publisher";
+        url_ = url_.replace(/[?&]$/, "");
+        const content_ = JSON.stringify(body);
+        let options_ = {
+            body: content_,
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        };
+        return this.http.fetch(url_, options_).then((_response) => {
+            return this.processPublisher2(_response);
         });
     }
     processPublisher2(response) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            const status = response.status;
-            let _headers = {};
-            if (response.headers && response.headers.forEach) {
-                response.headers.forEach((v, k) => _headers[k] = v);
-            }
-            ;
-            if (status === 200) {
-                const _responseText = yield response.text();
+        const status = response.status;
+        let _headers = {};
+        if (response.headers && response.headers.forEach) {
+            response.headers.forEach((v, k) => _headers[k] = v);
+        }
+        ;
+        if (status === 200) {
+            return response.text().then((_responseText) => {
                 return;
-            }
-            else if (status !== 200 && status !== 204) {
-                const _responseText_1 = yield response.text();
-                return throwException("An unexpected server error occurred.", status, _responseText_1, _headers);
-            }
-            return Promise.resolve(null);
-        });
+            });
+        }
+        else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+                return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve(null);
     }
     /**
      * @return Success
      */
     publisher3(id) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            let url_ = this.baseUrl + "/Publisher/{id}";
-            if (id === undefined || id === null)
-                throw new Error("The parameter 'id' must be defined.");
-            url_ = url_.replace("{id}", encodeURIComponent("" + id));
-            url_ = url_.replace(/[?&]$/, "");
-            let options_ = {
-                method: "GET",
-                headers: {
-                    "Accept": "text/plain"
-                }
-            };
-            const _response = yield this.http.fetch(url_, options_);
-            return yield this.processPublisher3(_response);
+        let url_ = this.baseUrl + "/Publisher/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        url_ = url_.replace(/[?&]$/, "");
+        let options_ = {
+            method: "GET",
+            headers: {
+                "Accept": "text/plain"
+            }
+        };
+        return this.http.fetch(url_, options_).then((_response) => {
+            return this.processPublisher3(_response);
         });
     }
     processPublisher3(response) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            const status = response.status;
-            let _headers = {};
-            if (response.headers && response.headers.forEach) {
-                response.headers.forEach((v, k) => _headers[k] = v);
-            }
-            ;
-            if (status === 200) {
-                const _responseText = yield response.text();
+        const status = response.status;
+        let _headers = {};
+        if (response.headers && response.headers.forEach) {
+            response.headers.forEach((v, k) => _headers[k] = v);
+        }
+        ;
+        if (status === 200) {
+            return response.text().then((_responseText) => {
                 let result200 = null;
                 let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
                 result200 = Publishers.fromJS(resultData200);
                 return result200;
-            }
-            else if (status !== 200 && status !== 204) {
-                const _responseText_1 = yield response.text();
-                return throwException("An unexpected server error occurred.", status, _responseText_1, _headers);
-            }
-            return Promise.resolve(null);
-        });
+            });
+        }
+        else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+                return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve(null);
     }
     /**
      * @param body (optional)
      * @return Success
      */
     publisher4(id, body) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            let url_ = this.baseUrl + "/Publisher/{id}";
-            if (id === undefined || id === null)
-                throw new Error("The parameter 'id' must be defined.");
-            url_ = url_.replace("{id}", encodeURIComponent("" + id));
-            url_ = url_.replace(/[?&]$/, "");
-            const content_ = JSON.stringify(body);
-            let options_ = {
-                body: content_,
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                }
-            };
-            const _response = yield this.http.fetch(url_, options_);
-            return yield this.processPublisher4(_response);
+        let url_ = this.baseUrl + "/Publisher/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        url_ = url_.replace(/[?&]$/, "");
+        const content_ = JSON.stringify(body);
+        let options_ = {
+            body: content_,
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        };
+        return this.http.fetch(url_, options_).then((_response) => {
+            return this.processPublisher4(_response);
         });
     }
     processPublisher4(response) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            const status = response.status;
-            let _headers = {};
-            if (response.headers && response.headers.forEach) {
-                response.headers.forEach((v, k) => _headers[k] = v);
-            }
-            ;
-            if (status === 200) {
-                const _responseText = yield response.text();
+        const status = response.status;
+        let _headers = {};
+        if (response.headers && response.headers.forEach) {
+            response.headers.forEach((v, k) => _headers[k] = v);
+        }
+        ;
+        if (status === 200) {
+            return response.text().then((_responseText) => {
                 return;
-            }
-            else if (status !== 200 && status !== 204) {
-                const _responseText_1 = yield response.text();
-                return throwException("An unexpected server error occurred.", status, _responseText_1, _headers);
-            }
-            return Promise.resolve(null);
-        });
+            });
+        }
+        else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+                return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve(null);
     }
     /**
      * @return Success
      */
     publisher5(id) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            let url_ = this.baseUrl + "/Publisher/{id}";
-            if (id === undefined || id === null)
-                throw new Error("The parameter 'id' must be defined.");
-            url_ = url_.replace("{id}", encodeURIComponent("" + id));
-            url_ = url_.replace(/[?&]$/, "");
-            let options_ = {
-                method: "DELETE",
-                headers: {}
-            };
-            const _response = yield this.http.fetch(url_, options_);
-            return yield this.processPublisher5(_response);
+        let url_ = this.baseUrl + "/Publisher/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        url_ = url_.replace(/[?&]$/, "");
+        let options_ = {
+            method: "DELETE",
+            headers: {}
+        };
+        return this.http.fetch(url_, options_).then((_response) => {
+            return this.processPublisher5(_response);
         });
     }
     processPublisher5(response) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            const status = response.status;
-            let _headers = {};
-            if (response.headers && response.headers.forEach) {
-                response.headers.forEach((v, k) => _headers[k] = v);
-            }
-            ;
-            if (status === 200) {
-                const _responseText = yield response.text();
+        const status = response.status;
+        let _headers = {};
+        if (response.headers && response.headers.forEach) {
+            response.headers.forEach((v, k) => _headers[k] = v);
+        }
+        ;
+        if (status === 200) {
+            return response.text().then((_responseText) => {
                 return;
-            }
-            else if (status !== 200 && status !== 204) {
-                const _responseText_1 = yield response.text();
-                return throwException("An unexpected server error occurred.", status, _responseText_1, _headers);
-            }
-            return Promise.resolve(null);
-        });
-    }
-    utilisateur() {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            let url_ = this.baseUrl + "/Utilisateur";
-            url_ = url_.replace(/[?&]$/, "");
-            let options_ = {
-                method: "GET",
-                headers: {
-                    "Authorization": "Bearer " + localStorage.getItem("token"),
-                    "Accept": "text/plain"
-                }
-            };
-            const _response = yield this.http.fetch(url_, options_);
-            return yield this.processUtilisateur(_response);
-        });
-    }
-    processUtilisateur(response) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            const status = response.status;
-            let _headers = {};
-            if (response.headers && response.headers.forEach) {
-                response.headers.forEach((v, k) => _headers[k] = v);
-            }
-            ;
-            if (status === 200) {
-                const _responseText = yield response.text();
-                let result200 = null;
-                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                result200 = Utilisateur.fromJS(resultData200);
-                return result200;
-            }
-            else if (status !== 200 && status !== 204) {
-                const _responseText_1 = yield response.text();
-                return throwException("An unexpected server error occurred.", status, _responseText_1, _headers);
-            }
-            return Promise.resolve(null);
-        });
-    }
-    /**
-     * @param body (optional)
-     * @return Success
-     */
-    utilisateurUpdate(body) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            let url_ = this.baseUrl + "/Utilisateur";
-            url_ = url_.replace(/[?&]$/, "");
-            const content_ = JSON.stringify(body);
-            let options_ = {
-                body: content_,
-                method: "PUT",
-                headers: {
-                    "Authorization": "Bearer " + localStorage.getItem("token"),
-                    "Content-Type": "application/json",
-                }
-            };
-            const _response = yield this.http.fetch(url_, options_);
-            return yield this.processUtilisateur2(_response);
-        });
-    }
-    processUtilisateur2(response) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            const status = response.status;
-            let _headers = {};
-            if (response.headers && response.headers.forEach) {
-                response.headers.forEach((v, k) => _headers[k] = v);
-            }
-            ;
-            if (status === 200) {
-                const _responseText = yield response.text();
-                return;
-            }
-            else if (status !== 200 && status !== 204) {
-                const _responseText_1 = yield response.text();
-                return throwException("An unexpected server error occurred.", status, _responseText_1, _headers);
-            }
-            return Promise.resolve(null);
-        });
+            });
+        }
+        else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+                return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve(null);
     }
     /**
      * @param authorization (optional)
      * @return Success
      */
-    utilisateurDelete() {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            let url_ = this.baseUrl + "/Utilisateur";
-            url_ = url_.replace(/[?&]$/, "");
-            let options_ = {
-                method: "DELETE",
-                headers: {
-                    "Authorization": "Bearer " + localStorage.getItem("token"),
-                }
-            };
-            const _response = yield this.http.fetch(url_, options_);
-            return yield this.processUtilisateur3(_response);
+    utilisateur(authorization) {
+        let url_ = this.baseUrl + "/Utilisateur";
+        url_ = url_.replace(/[?&]$/, "");
+        let options_ = {
+            method: "GET",
+            headers: {
+                "Authorization": authorization !== undefined && authorization !== null ? "" + authorization : "",
+                "Accept": "text/plain"
+            }
+        };
+        return this.http.fetch(url_, options_).then((_response) => {
+            return this.processUtilisateur(_response);
+        });
+    }
+    processUtilisateur(response) {
+        const status = response.status;
+        let _headers = {};
+        if (response.headers && response.headers.forEach) {
+            response.headers.forEach((v, k) => _headers[k] = v);
+        }
+        ;
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+                let result200 = null;
+                let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = Utilisateur.fromJS(resultData200);
+                return result200;
+            });
+        }
+        else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+                return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve(null);
+    }
+    /**
+     * @param authorization (optional)
+     * @param body (optional)
+     * @return Success
+     */
+    utilisateur2(authorization, body) {
+        let url_ = this.baseUrl + "/Utilisateur";
+        url_ = url_.replace(/[?&]$/, "");
+        const content_ = JSON.stringify(body);
+        let options_ = {
+            body: content_,
+            method: "PUT",
+            headers: {
+                "Authorization": authorization !== undefined && authorization !== null ? "" + authorization : "",
+                "Content-Type": "application/json",
+            }
+        };
+        return this.http.fetch(url_, options_).then((_response) => {
+            return this.processUtilisateur2(_response);
+        });
+    }
+    processUtilisateur2(response) {
+        const status = response.status;
+        let _headers = {};
+        if (response.headers && response.headers.forEach) {
+            response.headers.forEach((v, k) => _headers[k] = v);
+        }
+        ;
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+                return;
+            });
+        }
+        else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+                return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve(null);
+    }
+    /**
+     * @param authorization (optional)
+     * @return Success
+     */
+    utilisateur3(authorization) {
+        let url_ = this.baseUrl + "/Utilisateur";
+        url_ = url_.replace(/[?&]$/, "");
+        let options_ = {
+            method: "DELETE",
+            headers: {
+                "Authorization": authorization !== undefined && authorization !== null ? "" + authorization : "",
+            }
+        };
+        return this.http.fetch(url_, options_).then((_response) => {
+            return this.processUtilisateur3(_response);
         });
     }
     processUtilisateur3(response) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            const status = response.status;
-            let _headers = {};
-            if (response.headers && response.headers.forEach) {
-                response.headers.forEach((v, k) => _headers[k] = v);
-            }
-            ;
-            if (status === 200) {
-                const _responseText = yield response.text();
+        const status = response.status;
+        let _headers = {};
+        if (response.headers && response.headers.forEach) {
+            response.headers.forEach((v, k) => _headers[k] = v);
+        }
+        ;
+        if (status === 200) {
+            return response.text().then((_responseText) => {
                 return;
-            }
-            else if (status !== 200 && status !== 204) {
-                const _responseText_1 = yield response.text();
-                return throwException("An unexpected server error occurred.", status, _responseText_1, _headers);
-            }
-            return Promise.resolve(null);
-        });
+            });
+        }
+        else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+                return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve(null);
     }
     /**
      * @param authorization (optional)
      * @return Success
      */
     notificationsAll(authorization) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            let url_ = this.baseUrl + "/Utilisateur/notifications";
-            url_ = url_.replace(/[?&]$/, "");
-            let options_ = {
-                method: "GET",
-                headers: {
-                    "Authorization": authorization !== undefined && authorization !== null ? "" + authorization : "",
-                    "Accept": "text/plain"
-                }
-            };
-            const _response = yield this.http.fetch(url_, options_);
-            return yield this.processNotificationsAll(_response);
+        let url_ = this.baseUrl + "/Utilisateur/notifications";
+        url_ = url_.replace(/[?&]$/, "");
+        let options_ = {
+            method: "GET",
+            headers: {
+                "Authorization": authorization !== undefined && authorization !== null ? "" + authorization : "",
+                "Accept": "text/plain"
+            }
+        };
+        return this.http.fetch(url_, options_).then((_response) => {
+            return this.processNotificationsAll(_response);
         });
     }
     processNotificationsAll(response) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            const status = response.status;
-            let _headers = {};
-            if (response.headers && response.headers.forEach) {
-                response.headers.forEach((v, k) => _headers[k] = v);
-            }
-            ;
-            if (status === 200) {
-                const _responseText = yield response.text();
+        const status = response.status;
+        let _headers = {};
+        if (response.headers && response.headers.forEach) {
+            response.headers.forEach((v, k) => _headers[k] = v);
+        }
+        ;
+        if (status === 200) {
+            return response.text().then((_responseText) => {
                 let result200 = null;
                 let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
                 if (Array.isArray(resultData200)) {
@@ -927,81 +913,79 @@ class Client {
                         result200.push(Notifications.fromJS(item));
                 }
                 return result200;
-            }
-            else if (status !== 200 && status !== 204) {
-                const _responseText_1 = yield response.text();
-                return throwException("An unexpected server error occurred.", status, _responseText_1, _headers);
-            }
-            return Promise.resolve(null);
-        });
+            });
+        }
+        else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+                return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve(null);
     }
     /**
      * @param authorization (optional)
      * @return Success
      */
-    notificationsDelete(id, authorization) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            let url_ = this.baseUrl + "/Utilisateur/notifications/{id}";
-            if (id === undefined || id === null)
-                throw new Error("The parameter 'id' must be defined.");
-            url_ = url_.replace("{id}", encodeURIComponent("" + id));
-            url_ = url_.replace(/[?&]$/, "");
-            let options_ = {
-                method: "DELETE",
-                headers: {
-                    "Authorization": authorization !== undefined && authorization !== null ? "" + authorization : "",
-                }
-            };
-            const _response = yield this.http.fetch(url_, options_);
-            return yield this.processNotifications(_response);
+    notifications(id, authorization) {
+        let url_ = this.baseUrl + "/Utilisateur/notifications/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        url_ = url_.replace(/[?&]$/, "");
+        let options_ = {
+            method: "DELETE",
+            headers: {
+                "Authorization": authorization !== undefined && authorization !== null ? "" + authorization : "",
+            }
+        };
+        return this.http.fetch(url_, options_).then((_response) => {
+            return this.processNotifications(_response);
         });
     }
     processNotifications(response) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            const status = response.status;
-            let _headers = {};
-            if (response.headers && response.headers.forEach) {
-                response.headers.forEach((v, k) => _headers[k] = v);
-            }
-            ;
-            if (status === 200) {
-                const _responseText = yield response.text();
+        const status = response.status;
+        let _headers = {};
+        if (response.headers && response.headers.forEach) {
+            response.headers.forEach((v, k) => _headers[k] = v);
+        }
+        ;
+        if (status === 200) {
+            return response.text().then((_responseText) => {
                 return;
-            }
-            else if (status !== 200 && status !== 204) {
-                const _responseText_1 = yield response.text();
-                return throwException("An unexpected server error occurred.", status, _responseText_1, _headers);
-            }
-            return Promise.resolve(null);
-        });
+            });
+        }
+        else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+                return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve(null);
     }
     /**
      * @return Success
      */
     likeAll() {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            let url_ = this.baseUrl + "/Utilisateur/like";
-            url_ = url_.replace(/[?&]$/, "");
-            let options_ = {
-                method: "GET",
-                headers: {
-                    "Accept": "text/plain"
-                }
-            };
-            const _response = yield this.http.fetch(url_, options_);
-            return yield this.processLikeAll(_response);
+        let url_ = this.baseUrl + "/Utilisateur/like";
+        url_ = url_.replace(/[?&]$/, "");
+        let options_ = {
+            method: "GET",
+            headers: {
+                "Accept": "text/plain"
+            }
+        };
+        return this.http.fetch(url_, options_).then((_response) => {
+            return this.processLikeAll(_response);
         });
     }
     processLikeAll(response) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            const status = response.status;
-            let _headers = {};
-            if (response.headers && response.headers.forEach) {
-                response.headers.forEach((v, k) => _headers[k] = v);
-            }
-            ;
-            if (status === 200) {
-                const _responseText = yield response.text();
+        const status = response.status;
+        let _headers = {};
+        if (response.headers && response.headers.forEach) {
+            response.headers.forEach((v, k) => _headers[k] = v);
+        }
+        ;
+        if (status === 200) {
+            return response.text().then((_responseText) => {
                 let result200 = null;
                 let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
                 if (Array.isArray(resultData200)) {
@@ -1010,13 +994,14 @@ class Client {
                         result200.push(Utilisateur_Publisher.fromJS(item));
                 }
                 return result200;
-            }
-            else if (status !== 200 && status !== 204) {
-                const _responseText_1 = yield response.text();
-                return throwException("An unexpected server error occurred.", status, _responseText_1, _headers);
-            }
-            return Promise.resolve(null);
-        });
+            });
+        }
+        else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+                return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve(null);
     }
     /**
      * @param authorization (optional)
@@ -1024,81 +1009,79 @@ class Client {
      * @return Success
      */
     like(authorization, body) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            let url_ = this.baseUrl + "/Utilisateur/like";
-            url_ = url_.replace(/[?&]$/, "");
-            const content_ = JSON.stringify(body);
-            let options_ = {
-                body: content_,
-                method: "POST",
-                headers: {
-                    "Authorization": authorization !== undefined && authorization !== null ? "" + authorization : "",
-                    "Content-Type": "application/json",
-                    "Accept": "text/plain"
-                }
-            };
-            const _response = yield this.http.fetch(url_, options_);
-            return yield this.processLike(_response);
+        let url_ = this.baseUrl + "/Utilisateur/like";
+        url_ = url_.replace(/[?&]$/, "");
+        const content_ = JSON.stringify(body);
+        let options_ = {
+            body: content_,
+            method: "POST",
+            headers: {
+                "Authorization": authorization !== undefined && authorization !== null ? "" + authorization : "",
+                "Content-Type": "application/json",
+                "Accept": "text/plain"
+            }
+        };
+        return this.http.fetch(url_, options_).then((_response) => {
+            return this.processLike(_response);
         });
     }
     processLike(response) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            const status = response.status;
-            let _headers = {};
-            if (response.headers && response.headers.forEach) {
-                response.headers.forEach((v, k) => _headers[k] = v);
-            }
-            ;
-            if (status === 200) {
-                const _responseText = yield response.text();
+        const status = response.status;
+        let _headers = {};
+        if (response.headers && response.headers.forEach) {
+            response.headers.forEach((v, k) => _headers[k] = v);
+        }
+        ;
+        if (status === 200) {
+            return response.text().then((_responseText) => {
                 let result200 = null;
                 let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
                 result200 = resultData200 !== undefined ? resultData200 : null;
                 return result200;
-            }
-            else if (status !== 200 && status !== 204) {
-                const _responseText_1 = yield response.text();
-                return throwException("An unexpected server error occurred.", status, _responseText_1, _headers);
-            }
-            return Promise.resolve(null);
-        });
+            });
+        }
+        else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+                return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve(null);
     }
     /**
      * @return Success
      */
-    dislike(id) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            let url_ = this.baseUrl + "/Utilisateur/like/{id}";
-            if (id === undefined || id === null)
-                throw new Error("The parameter 'id' must be defined.");
-            url_ = url_.replace("{id}", encodeURIComponent("" + id));
-            url_ = url_.replace(/[?&]$/, "");
-            let options_ = {
-                method: "DELETE",
-                headers: {}
-            };
-            const _response = yield this.http.fetch(url_, options_);
-            return yield this.processLike2(_response);
+    like2(id) {
+        let url_ = this.baseUrl + "/Utilisateur/like/{id}";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        url_ = url_.replace(/[?&]$/, "");
+        let options_ = {
+            method: "DELETE",
+            headers: {}
+        };
+        return this.http.fetch(url_, options_).then((_response) => {
+            return this.processLike2(_response);
         });
     }
     processLike2(response) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            const status = response.status;
-            let _headers = {};
-            if (response.headers && response.headers.forEach) {
-                response.headers.forEach((v, k) => _headers[k] = v);
-            }
-            ;
-            if (status === 200) {
-                const _responseText = yield response.text();
+        const status = response.status;
+        let _headers = {};
+        if (response.headers && response.headers.forEach) {
+            response.headers.forEach((v, k) => _headers[k] = v);
+        }
+        ;
+        if (status === 200) {
+            return response.text().then((_responseText) => {
                 return;
-            }
-            else if (status !== 200 && status !== 204) {
-                const _responseText_1 = yield response.text();
-                return throwException("An unexpected server error occurred.", status, _responseText_1, _headers);
-            }
-            return Promise.resolve(null);
-        });
+            });
+        }
+        else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+                return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve(null);
     }
 }
 class AuthenticateUtilisateur {
@@ -1413,42 +1396,6 @@ class Pages {
         return data;
     }
 }
-class PaginationMovie {
-    constructor(data) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    this[property] = data[property];
-            }
-        }
-    }
-    init(_data) {
-        if (_data) {
-            this.pages = _data["pages"] ? Pages.fromJS(_data["pages"]) : undefined;
-            if (Array.isArray(_data["movies"])) {
-                this.movies = [];
-                for (let item of _data["movies"])
-                    this.movies.push(Movies.fromJS(item));
-            }
-        }
-    }
-    static fromJS(data) {
-        data = typeof data === 'object' ? data : {};
-        let result = new PaginationMovie();
-        result.init(data);
-        return result;
-    }
-    toJSON(data) {
-        data = typeof data === 'object' ? data : {};
-        data["pages"] = this.pages ? this.pages.toJSON() : undefined;
-        if (Array.isArray(this.movies)) {
-            data["movies"] = [];
-            for (let item of this.movies)
-                data["movies"].push(item.toJSON());
-        }
-        return data;
-    }
-}
 class PaginationPublisher {
     constructor(data) {
         if (data) {
@@ -1664,7 +1611,7 @@ class SigninpageComponent {
     }
     ngOnInit() {
         if (localStorage.getItem("token") && localStorage.getItem("refreshToken")) {
-            this.router.navigate(["movies", "0"]);
+            this.router.navigate(["movies"]);
         }
     }
     login() {
@@ -2412,7 +2359,7 @@ class SignuppageComponent {
     }
     ngOnInit() {
         if (localStorage.getItem("token") && localStorage.getItem("refreshToken")) {
-            this.router.navigate(["movies", "0"]);
+            this.router.navigate(["movies"]);
         }
     }
     signup() {
@@ -2565,7 +2512,7 @@ class MoviesService {
     }
     getPage(page) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            return yield this.client.movieGetPage(page);
+            return yield this.client.movieAll(page);
         });
     }
 }
@@ -2621,8 +2568,8 @@ const routes = [
     { path: 'signup', component: _components_signuppage_signuppage_component__WEBPACK_IMPORTED_MODULE_5__["SignuppageComponent"] },
     { path: 'publishers', component: _components_publishers_publishers_component__WEBPACK_IMPORTED_MODULE_9__["PublishersComponent"] },
     { path: 'notifications', component: _components_notifications_notifications_component__WEBPACK_IMPORTED_MODULE_10__["NotificationsComponent"] },
-    { path: 'movies/:id', component: _components_movies_movies_component__WEBPACK_IMPORTED_MODULE_8__["MoviesComponent"] },
-    { path: 'movie/:id', component: _components_movie_movie_component__WEBPACK_IMPORTED_MODULE_11__["MovieComponent"] },
+    { path: 'movies', component: _components_movies_movies_component__WEBPACK_IMPORTED_MODULE_8__["MoviesComponent"] },
+    { path: 'movie', component: _components_movie_movie_component__WEBPACK_IMPORTED_MODULE_11__["MovieComponent"] },
     {
         path: 'admin',
         component: _components_adminpage_adminpage_component__WEBPACK_IMPORTED_MODULE_1__["AdminpageComponent"],
@@ -2672,7 +2619,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function MoviesComponent_div_5_div_1_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 6);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 5);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](1, "h5", 7);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
@@ -2699,14 +2646,13 @@ function MoviesComponent_div_5_div_1_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate"](item_r3.deck);
 } }
 function MoviesComponent_div_5_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div");
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](1, MoviesComponent_div_5_div_1_Template, 10, 4, "div", 5);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵpipe"](2, "async");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 5);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](1, MoviesComponent_div_5_div_1_Template, 10, 4, "div", 6);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
 } if (rf & 2) {
     const movies_r1 = ctx.ngIf;
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngForOf", _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵpipeBind1"](2, 1, movies_r1));
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngForOf", movies_r1);
 } }
 class MoviesComponent {
     constructor(moviesService) {
@@ -2714,18 +2660,20 @@ class MoviesComponent {
     }
     ngOnInit() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            this.moviesService.getPage(0).then(o => this.movies$ = o.movies);
+            this.movies$ = this.moviesService.getPage(0);
+            console.log("HEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEY");
+            console.log((yield this.movies$).toString);
         });
     }
 }
 MoviesComponent.ɵfac = function MoviesComponent_Factory(t) { return new (t || MoviesComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](src_app_services_movies_service__WEBPACK_IMPORTED_MODULE_2__["MoviesService"])); };
-MoviesComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({ type: MoviesComponent, selectors: [["app-movies"]], decls: 7, vars: 3, consts: [[1, "container"], [1, "row"], [1, "col-6"], [1, "card"], [4, "ngIf"], ["class", "card-body", 4, "ngFor", "ngForOf"], [1, "card-body"], [1, "card-title"], ["width", "50px", "height", "50px", 2, "height", "100%", 3, "src"], [1, "card-subtitle", "mb-2", "text-muted"], [1, "card-text"], ["type", "button", 1, "btn", "btn-danger", "float-right"]], template: function MoviesComponent_Template(rf, ctx) { if (rf & 1) {
+MoviesComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({ type: MoviesComponent, selectors: [["app-movies"]], decls: 7, vars: 3, consts: [[1, "container"], [1, "row"], [1, "col-6"], [1, "card"], ["class", "card-body", 4, "ngIf"], [1, "card-body"], ["class", "card-body", 4, "ngFor", "ngForOf"], [1, "card-title"], ["width", "50px", "height", "50px", 2, "height", "100%", 3, "src"], [1, "card-subtitle", "mb-2", "text-muted"], [1, "card-text"], ["type", "button", 1, "btn", "btn-danger", "float-right"]], template: function MoviesComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](0, "app-nav");
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](1, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](2, "div", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](3, "div", 2);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](4, "div", 3);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](5, MoviesComponent_div_5_Template, 3, 3, "div", 4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](5, MoviesComponent_div_5_Template, 2, 1, "div", 4);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵpipe"](6, "async");
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
