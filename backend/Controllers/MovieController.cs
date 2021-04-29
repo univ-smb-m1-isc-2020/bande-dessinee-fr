@@ -8,7 +8,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace backend
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     [Authorize]
     public class MovieController : ControllerBase

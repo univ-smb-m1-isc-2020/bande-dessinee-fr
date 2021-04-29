@@ -8,7 +8,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace backend.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     [Authorize]
     public class PublisherController : ControllerBase

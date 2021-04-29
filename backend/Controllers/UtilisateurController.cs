@@ -13,7 +13,7 @@ using System.Text;
 
 namespace backend.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     [Authorize]
     public class UtilisateurController : ControllerBase

@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace backend
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class AdminController : ControllerBase
     {
