@@ -1,10 +1,10 @@
 <app-nav></app-nav>
 <div class="container">
     <div class="row">
-        <div class="col-6">
+        <div *ngIf="movies$ | async as movies" class="card-body">
+        <div *ngFor="let item of movies" class="col-6">
             <div class="card">
-                <div *ngIf="movies$ | async as movies" class="card-body">
-                    <div *ngFor="let item of movies" class="card-body">
+                    <div class="card-body">
                         <h5 class="card-title">{{item.name}}</h5>
                         <img [src]="item.image" width="50px" height="50px" style="height:100%;" />
                         <h6 class="card-subtitle mb-2 text-muted">{{item.release_date}}</h6>
