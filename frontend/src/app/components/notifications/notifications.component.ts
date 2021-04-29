@@ -19,8 +19,8 @@ export class NotificationsComponent implements OnInit {
     this.notifications$ = this.utilisateurService.notifications();
   }
   goToMovie(id){
-    this.router.navigate(["movies",+id]);
     this.utilisateurService.deleteNotif(+id);
+    this.router.navigate(["movies",+id]);
   }
 
 }
