@@ -11,11 +11,11 @@ import { MoviesService } from 'src/app/services/movies.service';
 export class MoviesComponent implements OnInit {
 
 
-  movies$: Promise<Movies[]>;
+  movies$: Movies[];
   constructor(private moviesService : MoviesService) { }
 
   async ngOnInit(): Promise<void> {
-    this.movies$ = this.moviesService.getPage(0);
+    this.movies$ = await this.moviesService.getPage(0);
   }
 
 }
