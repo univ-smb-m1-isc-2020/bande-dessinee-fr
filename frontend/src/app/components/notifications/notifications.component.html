@@ -3,7 +3,7 @@
     <div class="row">
         <div *ngIf="notifications$ | async as notifications">
             <div *ngFor="let item of notifications" class="col-6">
-                <div *ngIf="this.movieService.getMovie(item.movie_id) | async as movie">
+                <div *ngIf="this.moviesService.getMovie(item.movie_id) | async as movie">
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">{{movie.name}}</h5>
