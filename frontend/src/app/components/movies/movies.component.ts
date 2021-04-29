@@ -16,6 +16,7 @@ export class MoviesComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.movies$ = await this.moviesService.getPage(0);
+    console.log(this.movies$.forEach(o=>o.name));
   }
 
 }
