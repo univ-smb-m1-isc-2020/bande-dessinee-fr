@@ -14,9 +14,9 @@ export class UtilisateurService {
     var t = new CreateUtilisateur_Publisher();
     t.publisher_id = publisher_id;
     t.utilisateur_id = utilisateur_id;
-    this.client.like(localStorage.getItem("token"),t);
+    this.client.like("Bearer " + localStorage.getItem("token"),t);
   }
   async notifications(){
-    return await this.client.notificationsAll(localStorage.getItem("token"));
+    return await this.client.notificationsAll("Bearer " + localStorage.getItem("token"));
   }
 }
