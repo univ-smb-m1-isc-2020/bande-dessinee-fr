@@ -11,7 +11,7 @@ import { MoviesService } from 'src/app/services/movies.service';
 export class MoviesComponent implements OnInit {
 
 
-  movies$: any;
+  movies$: Promise<Movies[]>;
   constructor(private moviesService : MoviesService) { }
 
   async ngOnInit(): Promise<void> {
