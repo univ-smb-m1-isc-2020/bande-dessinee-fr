@@ -1,8 +1,8 @@
 <app-nav></app-nav>
 <div class="container">
     <div class="row">
-        <div *ngIf="movies$ | async as movies" class="card-body">
-          <div *ngFor="let item of movies" class="col-6">
+        <div *ngIf="publishers$ | async as pagination" class="card-body">
+          <div *ngFor="let item of pagination.publishers" class="col-6">
               <div class="card">
                   <div class="card-body">
                       <h5 class="card-title">{{item.name}}</h5>
